@@ -1,17 +1,21 @@
+import '../assets/styles/Main.css';
+
 function Main() {
   return (
-    <div className='Homepage'>
-      <div className=''>
-        <h1>find the perfect roommate today!</h1>
+    <div className='homepage'>
+      <div className='homepage-context'>
+        <h1>
+          Find the perfect <span>roommate today!</span>
+        </h1>
         <p>
-          tell us what you are looking for and we will match you with the
-          roommate with similar habits as you.
+          Tell us what you are looking for and we will match
+          <span>you with the roommate with similar habits as you.</span>
         </p>
-        <button>get started!</button>
+        <button>Get Started!</button>
       </div>
-      <div className=''>
-        <img src={require('../styles/roommates.png')} alt="roommates" />
-      </div>       
+      <div className='homepage-image'>
+        <img src={require('../assets/images/roommates.png')} alt='roommates' />
+      </div>
     </div>
   );
 }

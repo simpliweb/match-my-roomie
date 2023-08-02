@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.logo {
+    display: flex;
+    margin-left: -160px;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    margin: 18px;
+}
+
+.logo h2 {
+    color: #4488c5;
+    margin-top: 23px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+.nav li {    
+    font-size: 1.1rem;
+    list-style-type: none;
+    margin: 27px 20px 0;
+}
+
+.sign-in button {
+    margin-right: -160px;
+    font-size: 1rem;
+    border: transparent;
+    background-color: transparent;
+    margin-top: 29px;
+}

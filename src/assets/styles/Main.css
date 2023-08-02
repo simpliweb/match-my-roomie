@@ -1,0 +1,49 @@
+.homepage {
+    display: flex;
+    padding: 8% 5%;
+}
+
+.homepage-context {    
+    width: 50%;
+    padding: 6% 6% 0;
+}
+
+.homepage-context h1,p {
+    display: grid;
+    text-align: left;
+}
+
+.homepage-context h1 {
+    font-size: 2.9rem;
+    margin-bottom: 20px;
+}
+
+.homepage-context p {
+    margin-top: 0;    
+}
+
+.homepage-context p span {
+    margin-top: 5px;
+}
+
+.homepage-context button {
+    font-size: 1.2rem;
+    float: left;
+    color: #ffff;
+    background-color: #4488c5;
+    border: #4488c5;
+    border-radius: 10px;
+    padding: 10px 15px 13px;
+    margin-top: 10px;
+}
+
+.homepage-image {
+    width: 50%;
+    transform: rotate(-3deg);
+}
+
+.homepage-image img {
+    width: 100%;
+    display: block;
+    box-shadow: -20px 10px  #aed0ee;
+}
