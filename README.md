@@ -1,4 +1,3 @@
-
 # MatchMyRoomie
 a web application to find most compatible roommate.
 
