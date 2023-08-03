@@ -13,8 +13,13 @@ function Main() {
         </p>
         <button>Get Started!</button>
       </div>
-      <div className='homepage-image'>
-        <img src={require('../assets/images/roommates.png')} alt='roommates' />
+      <div className='shadow-box'>
+        <div className='homepage-image'>
+          <img
+            src={require('../assets/images/roommates.png')}
+            alt='roommates'
+          />
+        </div>
       </div>
     </div>
   );

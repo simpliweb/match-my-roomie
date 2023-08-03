@@ -1,11 +1,11 @@
 .header {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-evenly;    
 }
 
 .logo {
     display: flex;
-    margin-left: -160px;
+    margin-left: -180px;
 }
 
 .logo img {
@@ -17,6 +17,7 @@
 .logo h2 {
     color: #4488c5;
     margin-top: 23px;
+    font-family: regular;
 }
 
 .nav {
@@ -29,12 +30,16 @@
     font-size: 1.1rem;
     list-style-type: none;
     margin: 27px 20px 0;
+    font-family: medium;
+    cursor: pointer;
 }
 
 .sign-in button {
-    margin-right: -160px;
+    cursor: pointer;
+    margin-right: -190px;
     font-size: 1rem;
     border: transparent;
     background-color: transparent;
     margin-top: 29px;
+    font-family: medium;
 }

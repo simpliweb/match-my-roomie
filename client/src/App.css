@@ -2,11 +2,47 @@
   text-align: center;
   margin-right: auto;
   margin-left:  auto;
+  max-width: 1200px;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+@font-face {
+  font-family: "Dark";
+  /*Can be any text*/
+  src: local("Santoshi"),
+    url("../src/fonts/Satoshi-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Light";
+  /*Can be any text*/
+  src: local("Santoshi"),
+    url("../src/fonts/Satoshi-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Regular";
+  /*Can be any text*/
+  src: local("Santoshi"),
+    url("../src/fonts/Satoshi-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bold";
+  /*Can be any text*/
+  src: local("Santoshi"),
+    url("../src/fonts/Satoshi-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Medium";
+  /*Can be any text*/
+  src: local("Santoshi"),
+    url("../src/fonts/Satoshi-Medium.ttf") format("truetype");
 }
 
 @media (prefers-reduced-motion: no-preference) {
