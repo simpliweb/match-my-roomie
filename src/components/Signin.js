@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
 import '../assets/styles/Signin.css';
 
 function SignIn() {
+  const [data, setData] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',  
+  });
+  const [err, setErr] = useState({}); // [err, setErr]
+
+  const handleChange = ({currentTarget: input}) => {
+    setData({
+      ...data,
+      [input.name]: input.value
+    })
+  };
+
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -11,8 +27,23 @@ function SignIn() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
     console.log(data);
+    try{
+      const url = "http://localhost:8000/user/signup"; // this is the backend url and it will change after i deploy the backend and i will deply it when frontent is completed.
+      const {data:res} = await axios.post(url, data);
+      console.log(res.message);
+    } catch(err){
+      if(
+        err.response &&
+        err.response.status >= 400 &&
+        err.response.status <= 500
+      ){
+        setErr(err.response.data.message);
+      }
+    }
+    // console.log(data);
   };
 
   return (
@@ -43,6 +74,8 @@ function SignIn() {
                   {...field}
                   type='email'
                   placeholder='email@matchmyroomie.com'
+                  value={data.email}
+                  onChange={handleChange}
                 />
               )}
             />
@@ -59,7 +92,13 @@ function SignIn() {
                 defaultValue=''
                 rules={{ required: 'First Name is required.' }}
                 render={({ field }) => (
-                  <input {...field} type='text' placeholder='Jane' />
+                  <input 
+                  {...field} 
+                  type='text' 
+                  placeholder='Jane'
+                  value={data.firstName}
+                  onChange={handleChange}
+                  />
                 )}
               />
               {errors.firstName && <p>{errors.firstName.message}</p>}
@@ -74,7 +113,13 @@ function SignIn() {
                 defaultValue=''
                 rules={{ required: 'Last Name is required.' }}
                 render={({ field }) => (
-                  <input {...field} type='text' placeholder='Doe' />
+                  <input 
+                  {...field} 
+                  type='text' 
+                  placeholder='Doe' 
+                  value={data.lastName}
+                  onChange={handleChange}
+                  />
                 )}
               />
               {errors.lastName && <p>{errors.lastName.message}</p>}
@@ -101,7 +146,10 @@ function SignIn() {
               }}
               render={({ field }) => (
                 <div className='password-input'>
-                  <input {...field} type='password' placeholder='*********' />
+                  <input {...field} type='password' placeholder='*********' 
+                  value={data.password}
+                  onChange={handleChange}
+                  />
                   <i
                     className='far fa-eye password-toggle-icon'
                     onClick={() => setShowPassword(!showPassword)}
