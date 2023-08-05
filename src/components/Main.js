@@ -17,7 +17,7 @@ function Main() {
             Tell us what you are looking for and we will match
             <span>you with the roommate with similar habits as you.</span>
           </p>
-          <button onClick={() => navigate('/sign-up')}>Get Started!</button>
+          <button onClick={() => navigate('/signup')}>Get Started!</button>
         </div>
         <div className='shadow-box'>
           <div className='homepage-image'>

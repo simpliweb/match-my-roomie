@@ -12,7 +12,7 @@ user_router.get("/", (req, res) => {
 });
 
 user_router.post("/signup", async (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   try {
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {

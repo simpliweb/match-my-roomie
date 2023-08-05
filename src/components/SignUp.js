@@ -1,15 +1,19 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import '../assets/styles/SignUp.css';
+import '../assets/styles/Signup.css';
 
-function SignUp() {
-  //const [password, setPassword] = useState('');
+
+function Signup() {
+	const [error, setError] = useState('');
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
-
-  // const handlePasswordChange = (event) => {
-  //   setPassword(event.target.value);
-  // };
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -17,8 +21,12 @@ function SignUp() {
 
   const handleFormValidation = async () => {
     const isValid = await trigger(); // Manually trigger form validation
-    setIsFormValid(isValid);
+    setIsFormValid(isValid);  
   };
+
+  // const handleChange = ({ currentTarget: input }) => {
+  //   setData({ ...data, [input.name]: input.value });
+  // };
 
   const {
     control,
@@ -27,8 +35,21 @@ function SignUp() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async () => {
+    console.log(data)
+    try {
+      const url = 'http://localhost:8000/user/signup';
+      const { data: res } = await axios.post(url, data);      ;
+      console.log(res.message);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
     setIsFormValid(true);
   };
 
@@ -60,6 +81,8 @@ function SignUp() {
                   {...field}
                   type='email'
                   placeholder='email@matchmyroomie.com'
+                  // value={data.email}
+                  // onChange={handleChange}
                 />
               )}
             />
@@ -78,7 +101,13 @@ function SignUp() {
                 defaultValue=''
                 rules={{ required: 'First Name is required.' }}
                 render={({ field }) => (
-                  <input {...field} type='text' placeholder='Jane' />
+                  <input
+                    {...field}
+                    type='text'
+                    placeholder='Jane'
+                    // value={data.firstName}
+                    // onChange={handleChange}
+                  />
                 )}
               />
               {errors.firstName && (
@@ -95,7 +124,13 @@ function SignUp() {
                 defaultValue=''
                 rules={{ required: 'Last Name is required.' }}
                 render={({ field }) => (
-                  <input {...field} type='text' placeholder='Doe' />
+                  <input
+                    {...field}
+                    type='text'
+                    placeholder='Doe'
+                    // value={data.lastName}
+                    // onChange={handleChange}
+                  />
                 )}
               />
               {errors.lastName && (
@@ -130,6 +165,8 @@ function SignUp() {
                     // value={password}
                     // onChange={handlePasswordChange}
                     placeholder='*********'
+                    // value={data.password}
+                    // onChange={handleChange}
                   />
                   <i
                     className={showPassword ? 'far fa-eye' : 'far fa-eye-slash'}
@@ -152,12 +189,8 @@ function SignUp() {
               </ul>
             )} */}
           </label>
-          {/* <div className='signup-button'> */}
           <div className={`signup-button ${isFormValid ? 'blue-button' : ''}`}>
-            {/* <button onClick={handleSubmit(onSubmit)}>Sign Up</button> */}
-            <button type='submit' onClick={handleFormValidation}>
-              Sign Up
-            </button>
+            <button type='submit' onClick={handleFormValidation}>Sign Up</button>
           </div>
         </form>
 
@@ -177,4 +210,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Signup;
