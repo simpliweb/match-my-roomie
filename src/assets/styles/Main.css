@@ -31,7 +31,6 @@
 }
 
 .homepage-context button {
-    cursor: pointer;
     font-size: 1.2rem;
     float: left;
     color: #ffff;
@@ -42,6 +41,10 @@
     margin-top: 25px;
     font-family: medium;
     letter-spacing: 1.2px;
+}
+
+.homepage-context button:focus {
+    border: 1px solid rgba(0, 0, 0);
 }
 
 .shadow-box {

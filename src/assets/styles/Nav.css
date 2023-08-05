@@ -26,20 +26,29 @@
     
 }
 
-.nav li {    
+.nav a {     
+    color: #000000; 
     font-size: 1.1rem;
+    text-decoration: none;
     list-style-type: none;
     margin: 27px 20px 0;
     font-family: medium;
     cursor: pointer;
 }
 
-.log-in button {
-    cursor: pointer;
+.nav a:focus {
+    text-decoration: underline;
+}
+
+.sign-in button {
     margin-right: -190px;
     font-size: 1rem;
     border: transparent;
     background-color: transparent;
     margin-top: 29px;
     font-family: medium;
+}
+
+.sign-in button:focus {
+    text-decoration: underline;
 }

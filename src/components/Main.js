@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import '../assets/styles/Main.css';
 import Navbar from './Nav';
 
 function Main() {
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
@@ -15,7 +17,7 @@ function Main() {
             Tell us what you are looking for and we will match
             <span>you with the roommate with similar habits as you.</span>
           </p>
-          <button>Get Started!</button>
+          <button onClick={() => navigate('/sign-up')}>Get Started!</button>
         </div>
         <div className='shadow-box'>
           <div className='homepage-image'>

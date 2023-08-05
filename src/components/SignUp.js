@@ -1,22 +1,39 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import '../assets/styles/Signin.css';
+import '../assets/styles/SignUp.css';
 
-function SignIn() {
+function SignUp() {
+  //const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  // const handlePasswordChange = (event) => {
+  //   setPassword(event.target.value);
+  // };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const handleFormValidation = async () => {
+    const isValid = await trigger(); // Manually trigger form validation
+    setIsFormValid(isValid);
+  };
 
   const {
     control,
     handleSubmit,
+    trigger,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
+    setIsFormValid(true);
   };
 
   return (
-    <div className='sign-in'>
+    <div className='sign-up'>
       <div className='account-create'>
         <h2>Create an Account</h2>
         <form
@@ -46,7 +63,9 @@ function SignIn() {
                 />
               )}
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className='error-message'>{errors.email.message}</p>
+            )}
           </label>
 
           {/* first name */}
@@ -62,7 +81,9 @@ function SignIn() {
                   <input {...field} type='text' placeholder='Jane' />
                 )}
               />
-              {errors.firstName && <p>{errors.firstName.message}</p>}
+              {errors.firstName && (
+                <p className='error-message'>{errors.firstName.message}</p>
+              )}
             </label>
 
             {/* last name */}
@@ -77,7 +98,9 @@ function SignIn() {
                   <input {...field} type='text' placeholder='Doe' />
                 )}
               />
-              {errors.lastName && <p>{errors.lastName.message}</p>}
+              {errors.lastName && (
+                <p className='error-message'>{errors.lastName.message}</p>
+              )}
             </label>
           </div>
 
@@ -87,39 +110,54 @@ function SignIn() {
             <Controller
               name='password'
               control={control}
-              defaultValue=''
+              // defaultValue=''
               rules={{
                 required: 'Password is required.',
                 minLength: {
                   value: 8,
-                  //   message: 'Password must be at least 8 characters long.',
+                  message: 'Password must be at least 8 characters long.',
                 },
                 pattern: {
-                  value: /^(?=.*[!@#$%^&*])/, // Requires at least one symbol
-                  //   message: 'Password must contain at least one symbol.',
+                  value: /^(?=.*[!@#$%^&*])/,
+                  message: 'Password must contain at least one symbol.',
                 },
               }}
               render={({ field }) => (
                 <div className='password-input'>
-                  <input {...field} type='password' placeholder='*********' />
+                  <input
+                    {...field}
+                    type={showPassword ? 'text' : 'password'}
+                    // value={password}
+                    // onChange={handlePasswordChange}
+                    placeholder='*********'
+                  />
                   <i
-                    className='far fa-eye password-toggle-icon'
-                    onClick={() => setShowPassword(!showPassword)}
+                    className={showPassword ? 'far fa-eye' : 'far fa-eye-slash'}
+                    onClick={togglePasswordVisibility}
                     aria-hidden='true'
                   ></i>
                 </div>
               )}
             />
             {errors.password && (
-              <ul className='password-info'>
+              <p className='password-error-message'>
+                {errors.password.message}
+              </p>
+            )}
+            {/* {errors.password && (
+              <ul className='password-error-message'>
                 Your password must contain:
                 <li>a symbol</li>
                 <li>a minimum of 8 characters</li>
               </ul>
-            )}
+            )} */}
           </label>
-          <div className='signup-button'>
-            <button onClick={onSubmit}>Sign Up</button>
+          {/* <div className='signup-button'> */}
+          <div className={`signup-button ${isFormValid ? 'blue-button' : ''}`}>
+            {/* <button onClick={handleSubmit(onSubmit)}>Sign Up</button> */}
+            <button type='submit' onClick={handleFormValidation}>
+              Sign Up
+            </button>
           </div>
         </form>
 
@@ -131,7 +169,7 @@ function SignIn() {
       <div className='account-side'>
         <img src={require('../assets/images/Ellipse 11.png')} alt='roommates' />
         <p>
-          "Thanks to MatchMyRoomie, I <span>found my new best friend!"</span>
+          "Thanks to MatchMyRoomie, I<span>found my new best friend!"</span>
           <span>- Tanya, 29</span>
         </p>
       </div>
@@ -139,4 +177,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;

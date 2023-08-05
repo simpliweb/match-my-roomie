@@ -1,18 +1,12 @@
-/* .header {
-    /* position: absolute; */
-    /* display: none; */
-    /* z-index: -1; */
-
-.sign-in {
-    /* position: relative; */
+.sign-up {
     width: 100%;
+    height: auto;
     display: flex;
-    /* padding: 5%; */
 }
 
 .account-create {
-    width: 60%;
-    padding: 5% 10%;
+    width: 60%;    
+    padding: 15% 10%;
 }
 
 .account-create h2 {
@@ -22,15 +16,20 @@
 }
 
 label {
-    /* width: 60%; */
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 85%;
     height: 100%;
     text-align: left;
     align-items: left;
     font-family: medium;
     margin-bottom: 20px;
+}
+
+.error-message, .password-error-message {
+    font-size: 0.8rem;
+    color:red;
+    margin: 0;
 }
 
 .label-name {
@@ -49,20 +48,40 @@ input {
     width: 75%;
 }
 
-/* come back to this to fix */
 .password-input {
     position: relative;
 }
-.password-toggle-icon {
+
+.password-input i {
     position: absolute;
-    right: 10px;
-    top: 50%;
+    left: 70%;
+    top: 55%;
     transform: translateY(-50%);
     cursor: pointer;
 }
 
+.password-error-message {
+    text-align: left;
+    padding-left: 0;
+}
+
+.password-error-message li {
+    margin-left: 12px;
+}
+
 .signup-button {   
     text-align: left;
+}
+
+.signup-button.blue-button button {
+  background-color: #4488c5;
+  border: inherit;
+  color: white;
+  cursor: pointer;
+}
+
+.signup-button.blue-button button:focus {
+  border: 1px solid #000000; 
 }
 
 .signup-button button {    
@@ -92,8 +111,8 @@ input {
 .account-side {
     background-color: #c7dbee;
     width: 40%;
-    height: 100%;
-    padding: 13% 5% 25%;
+    height: 45vh;
+    padding: 20% 5% 25%;
 }
 
 .account-side img {
@@ -105,3 +124,4 @@ input {
     text-align: center;
     font-family: medium;
 }
+

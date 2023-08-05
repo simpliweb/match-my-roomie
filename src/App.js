@@ -1,20 +1,18 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Main from "./components/Main";
-import Navbar from "./components/Nav";
-import SignIn from './components/Signin';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Main from './components/Main';
+import SignUp from './components/SignUp';
 
-import "./App.css";
+import './App.css';
 
 function App() {
   return (
     <Router>
       <div className='App'>
-        {/* <Navbar /> */}
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='/home' element={<Main />} />
-          <Route path='/signin' element={<SignIn />} />
+          <Route path='/sign-up' element={<SignUp />} />
 
           {/* Add other routes as needed */}
         </Routes>
