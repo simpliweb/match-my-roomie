@@ -6,12 +6,12 @@ import '../assets/styles/Signup.css';
 
 function Signup() {
 	const [error, setError] = useState('');
-  const [data, setData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
+  // const [data, setData] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   email: '',
+  //   password: '',
+  // });
   const [showPassword, setShowPassword] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -31,16 +31,20 @@ function Signup() {
   const {
     control,
     handleSubmit,
+    reset,
     trigger,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async () => {
-    console.log(data)
+  const onSubmit = async (formData) => {
+    // console.log(data)
     try {
       const url = 'http://localhost:8000/user/signup';
-      const { data: res } = await axios.post(url, data);      ;
+      const { data: res } = await axios.post(url, formData);
       console.log(res.message);
+
+      // Clear the form after successful submission
+      reset(); // Call the reset function
     } catch (error) {
       if (
         error.response &&
@@ -145,7 +149,7 @@ function Signup() {
             <Controller
               name='password'
               control={control}
-              // defaultValue=''
+              defaultValue=''
               rules={{
                 required: 'Password is required.',
                 minLength: {
