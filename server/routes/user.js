@@ -27,7 +27,7 @@ user_router.post("/signup", async (req, res) => {
     });
     res.status(200).send({ message: "User created successfully" });
   } catch (error) {
-    // console.log(error);
+    //console.log(error);
     res.status(500).send({ message: "Internal Server Error" });
   }
 });

@@ -10,7 +10,7 @@ create_router.use(cors());
 
 
 create_router.route("/createprofile").post((req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   const { Name, lastName, Gender, age, about } = req.body;
 
   // console.log(req.body);
