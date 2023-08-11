@@ -3,6 +3,7 @@ import React from 'react';
 import Main from './components/Main';
 import Signup from './components/Signup';
 import Display from './components/creatyourprofile/Display';
+import Gender from './components/creatyourprofile/Gender';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path='/home' element={<Main />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/display' element={<Display />} />
+          <Route path='/gender' element={<Gender />} />
 
           {/* Add other routes as needed */}
         </Routes>

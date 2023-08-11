@@ -1,38 +1,57 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 
 function Display() {
   const {
-    handleSubmit,
-    reset,
     control,
+    handleSubmit,
+    // reset,
+    // trigger,
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const [error, setError] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
+  const [signUpCompleted, setSignUpCompleted] = useState(false);
 
-  const onSubmit = async (formData) => {
-    // console.log(data)
-    try {
-      const url = 'http://localhost:8000/user/signup';
-      const { data: res } = await axios.post(url, formData);
-      console.log(res.message);
-
-      // Clear the form after successful submission
-      reset(); // Call the reset function
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
-    }
-    setIsFormValid(true);
+//   const handleFormValidation = async () => {
+//     const isValid = await trigger(); // Manually trigger form validation
+//     setIsFormValid(isValid);
+//   };  
+  const onSubmit = async () => {
+    navigate('/gender');
   };
+
+//   const onSubmit = async (formData) => {
+//     // console.log(data)
+//     try {
+//       const url = 'http://localhost:8000/user/signup';
+//       const { data: res } = await axios.post(url, formData);
+//       console.log(res.message);
+
+//       // Clear the form after successful submission
+//       //reset(); // Call the reset function
+
+//       // Set sign-up completed to true
+//       setSignUpCompleted(true);
+
+//       // Navigate to another page
+//       navigate('/gender');
+//     } catch (error) {
+//       if (
+//         error.response &&
+//         error.response.status >= 400 &&
+//         error.response.status <= 500
+//       ) {
+//         setError(error.response.data.message);
+//       }
+//     }
+//     setIsFormValid(true);
+//   };
 
   return (
     <div className='profile-container'>
@@ -89,21 +108,29 @@ function Display() {
             defaultValue=''
             rules={{ required: 'Age is required.' }}
             render={({ field }) => (
-              <select id='age' {...field}>
-                <option value='' disabled>
-                  Select an age
-                </option>
-                <option value='18-22'>18-22</option>
-                <option value='23-27'>23-27</option>
-                <option value='28-32'>28-32</option>
-                <option value='33-37'>33-37</option>
-                <option value='38-42'>38-42</option>
-                <option value='43-47'>43-47</option>
-                <option value='48-52'>48-52</option>
-                <option value='53+'>53+</option>
-              </select>
+              <div className='age-label'>
+                <select id='age' {...field}>
+                  <option value='' disabled>
+                    Select an age
+                  </option>
+                  <option value='18-22'>18-22</option>
+                  <option value='23-27'>23-27</option>
+                  <option value='28-32'>28-32</option>
+                  <option value='33-37'>33-37</option>
+                  <option value='38-42'>38-42</option>
+                  <option value='43-47'>43-47</option>
+                  <option value='48-52'>48-52</option>
+                  <option value='53+'>53+</option>
+                </select>
+                {errors.age && (
+                  <p className='error-message'>{errors.age.message}</p>
+                )}
+              </div>
             )}
           />
+          {/* <button type='submit' onClick={handleFormValidation}>
+            Continue
+          </button> */}
           <button type='submit'>Continue</button>
         </div>
       </form>
