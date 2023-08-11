@@ -1,19 +1,25 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import '../assets/styles/Signup.css';
 
 
 function Signup() {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    trigger,
+    formState: { errors },
+  } = useForm();
+
+  const navigate = useNavigate();
+
 	const [error, setError] = useState('');
-  // const [data, setData] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   email: '',
-  //   password: '',
-  // });
   const [showPassword, setShowPassword] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [signUpCompleted, setSignUpCompleted] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -22,19 +28,7 @@ function Signup() {
   const handleFormValidation = async () => {
     const isValid = await trigger(); // Manually trigger form validation
     setIsFormValid(isValid);  
-  };
-
-  // const handleChange = ({ currentTarget: input }) => {
-  //   setData({ ...data, [input.name]: input.value });
-  // };
-
-  const {
-    control,
-    handleSubmit,
-    reset,
-    trigger,
-    formState: { errors },
-  } = useForm();
+  };  
 
   const onSubmit = async (formData) => {
     // console.log(data)
@@ -44,7 +38,13 @@ function Signup() {
       console.log(res.message);
 
       // Clear the form after successful submission
-      reset(); // Call the reset function
+      reset();
+
+      // Set sign-up completed to true
+      setSignUpCompleted(true);
+
+      // Navigate to another page
+      navigate('/display');
     } catch (error) {
       if (
         error.response &&
