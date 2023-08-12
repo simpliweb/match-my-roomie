@@ -58,16 +58,16 @@ function Signup() {
   };
 
   return (
-    <div className='sign-up'>
+    <div className='sign-up-container'>
       <div className='account-create'>
-        <h2>Create an Account</h2>
+        <h2 className='account-create-h2'>Create an Account</h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           className='container'
         >
           {/* email */}
-          <label className='email'>
+          <label className='account-create-label'>
             Email
             <Controller
               name='email'
@@ -82,6 +82,7 @@ function Signup() {
               }}
               render={({ field }) => (
                 <input
+                  className='account-create-input'
                   {...field}
                   type='email'
                   placeholder='email@matchmyroomie.com'
@@ -96,8 +97,8 @@ function Signup() {
           </label>
 
           {/* first name */}
-          <div className='label-name'>
-            <label>
+          <div className='account-create-label-name'>
+            <label className='account-create-label'>
               First Name
               <Controller
                 name='firstName'
@@ -106,6 +107,7 @@ function Signup() {
                 rules={{ required: 'First Name is required.' }}
                 render={({ field }) => (
                   <input
+                    className='account-create-label-name-input'
                     {...field}
                     type='text'
                     placeholder='Jane'
@@ -120,7 +122,7 @@ function Signup() {
             </label>
 
             {/* last name */}
-            <label>
+            <label className='account-create-label'>
               Last Name
               <Controller
                 name='lastName'
@@ -129,6 +131,7 @@ function Signup() {
                 rules={{ required: 'Last Name is required.' }}
                 render={({ field }) => (
                   <input
+                    className='account-create-label-name-input'
                     {...field}
                     type='text'
                     placeholder='Doe'
@@ -144,7 +147,7 @@ function Signup() {
           </div>
 
           {/* password */}
-          <label>
+          <label className='account-create-label'>
             Password
             <Controller
               name='password'
@@ -164,6 +167,7 @@ function Signup() {
               render={({ field }) => (
                 <div className='password-input'>
                   <input
+                    className='account-create-input'
                     {...field}
                     type={showPassword ? 'text' : 'password'}
                     // value={password}
@@ -194,7 +198,9 @@ function Signup() {
             )} */}
           </label>
           <div className={`signup-button ${isFormValid ? 'blue-button' : ''}`}>
-            <button type='submit' onClick={handleFormValidation}>Sign Up</button>
+            <button type='submit' onClick={handleFormValidation}>
+              Sign Up
+            </button>
           </div>
         </form>
 
@@ -204,7 +210,7 @@ function Signup() {
       </div>
 
       <div className='account-side'>
-        <img src={require('../assets/images/Ellipse 11.png')} alt='roommates' />
+        <img src={require('../assets/images/ellipse11.png')} alt='roommates' />
         <p>
           "Thanks to MatchMyRoomie, I<span>found my new best friend!"</span>
           <span>- Tanya, 29</span>

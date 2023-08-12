@@ -1,6 +1,6 @@
-.sign-up {
+.sign-up-container {
     width: 100%;
-    height: auto;
+    height: 100vh;
     display: flex;
 }
 
@@ -9,13 +9,13 @@
     padding: 15% 10%;
 }
 
-.account-create h2 {
+.account-create-h2 {
     font-size: 2rem;
     font-family: medium;
     text-align: left;
 }
 
-label {
+.account-create-label {
     display: flex;
     flex-direction: column;
     width: 85%;
@@ -32,15 +32,19 @@ label {
     margin: 0;
 }
 
-.label-name {
+.account-create-label-name {
     display: flex;
 }
 
-.label-name input {
+.account-create-label-name-input {
     width: 80%;
+    margin-top: 5px;
+    border-radius: 5px;
+    padding: 13px;
+    border: 1px solid rgba(0, 0, 0);
 }
 
-input {
+.account-create-input {
     margin-top: 5px;
     border-radius: 5px;
     padding: 13px;
@@ -97,7 +101,7 @@ input {
 
 .account-check {
     margin-top: 30px;
-    font-family: regular;
+    font-family: Regular;
 }
 
 .account-check button {
@@ -111,11 +115,10 @@ input {
 .account-side {
     background-color: #c7dbee;
     width: 40%;
-    height: 45vh;
     padding: 20% 5% 25%;
 }
 
-.account-side img {
+.account-side img{
     width: 58%;   
 }
 
