@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Questions from './Questions';
 import './Quiz.css';
 
@@ -9,10 +10,13 @@ import apartmentIcon from '../../assets/images/icon/Apartment.png';
 import bedIcon from '../../assets/images/icon/Single Bed.png';
 
 function Quiz() {
+  const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState('');
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const currentQuestion = Questions[currentQuestionIndex];
+  const progressPercentage =
+    (currentQuestionIndex / (Questions.length - 1)) * 100;
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -22,7 +26,13 @@ function Quiz() {
   const handleNextQuestion = () => {
     setSelectedOption('');
     setIsContinueDisabled(true);
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
+    
+    if (currentQuestionIndex < Questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      // Navigate to the results page when all questions are answered
+      navigate('/results');
+    }
   };
 
   const handlePreviousQuestion = () => {
@@ -47,6 +57,16 @@ function Quiz() {
         </button>
       </div>
       <div className='quiz-questions'>
+        <div className='progress-indicator-container'>
+          {Questions.map((_, index) => (
+            <div
+              key={index}
+              className={`progress-indicator ${
+                index <= currentQuestionIndex ? 'completed' : ''
+              }`}
+            ></div>
+          ))}
+        </div>
         {currentQuestionIndex < Questions.length ? (
           <div>
             <h2>Quiz</h2>
@@ -95,11 +115,15 @@ function Quiz() {
       </div>
       <div className='quiz-image'>
         {currentQuestionIndex <= 1 && (
-          <img src={require('../../assets/images/' + Questions[0].image)} alt='Common Image' />
+          <img
+            src={require('../../assets/images/' + Questions[0].image)}
+            alt='Common Image'
+          />
         )}
         {currentQuestionIndex >= 2 && (
           <img
-            src={require('../../assets/images/' + Questions[currentQuestionIndex].image)}
+            src={require('../../assets/images/' +
+              Questions[currentQuestionIndex].image)}
             alt={`Question ${currentQuestionIndex + 1} Image`}
           />
         )}

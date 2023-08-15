@@ -9,3 +9,24 @@
    height: 300px;
    display: block;
 }
+
+/* Styling for the progress bar container */
+.progress-bar-container {
+  margin-bottom: 20px; 
+}
+
+
+/* Styling for the progress indicators */
+.progress-indicator {
+  display: inline-flex;
+  margin-right: 20px; 
+  width: 65px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: #E6E6E6;  
+}
+
+/* Styling for completed progress indicators */
+.progress-indicator.completed {
+  background-color: #4488C5;
+}
