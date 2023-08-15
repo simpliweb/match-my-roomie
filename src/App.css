@@ -15,6 +15,18 @@ button {
   cursor: pointer;
 }
 
+.submit-button {
+  background-color: #677684;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.submit-button.filled {
+  background-color: #4488C5; 
+}
+
 @font-face {
   font-family: "Dark";
   /*Can be any text*/

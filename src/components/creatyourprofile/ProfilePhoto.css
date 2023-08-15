@@ -1,0 +1,59 @@
+.profilephoto-container {
+    display: flex;
+}
+
+#all-profilephoto {
+    background-color: #4488C5;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.custom-file-upload input[type='file'] {
+  display: none; /* Hide the default input button */
+}
+
+.custom-file-upload span {
+  font-size: 16px;
+}
+
+.upload-button {
+  background-color: #677684;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.upload-button.uploaded {
+  background-color: #4488C5;
+}
+
+.error-message {
+  color: #dc3545;
+}
+
+.image-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f2f2f2;
+  border: 
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+}

@@ -59,10 +59,10 @@ function Display() {
     <div className='profile-container'>
       <div className='profile-create-info'>
         <div className='progress-bar'>
-          <div class='rectangle' id='first'></div>
-          <div class='rectangle' id='second'></div>
-          <div class='rectangle' id='third'></div>
-          <div class='rectangle' id='fourth'></div>
+          <div className='rectangle' id='first'></div>
+          <div className='rectangle' id='second'></div>
+          <div className='rectangle' id='third'></div>
+          <div className='rectangle' id='fourth'></div>
         </div>
 
         <h2 className='profile-create-info-h2'>Create Your Profile</h2>
@@ -163,12 +163,15 @@ function Display() {
               All users must be at leats 18 years or older. We use age to ensure
               the most accurate matches.
             </p>
-            <button className='profile-continue-button' type='submit'>Continue</button>
+            <button className='profile-continue-button' type='submit'>
+              Continue
+            </button>
           </div>
         </form>
       </div>
 
-      <div className='profile-info-side'>
+      {/* <div className='profile-info-side'> */}
+      <div className='info-side'>
         <img
           src={require('../../assets/images/results-card-blurry.png')}
           alt='matched user profile with image and details'
