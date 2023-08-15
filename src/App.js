@@ -7,6 +7,7 @@ import Gender from './components/creatyourprofile/Gender';
 import Biography from './components/creatyourprofile/Biography';
 import ProfilePhoto from './components/creatyourprofile/ProfilePhoto';
 import Success from './components/creatyourprofile/Success';
+import Quiz from './components/compatibility-quiz/Quiz';
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/biography' element={<Biography />} />
           <Route path='/profilephoto' element={<ProfilePhoto />} />
           <Route path='/success' element={<Success />} />
+          <Route path='/quiz' element={<Quiz />} />
         </Routes>
       </div>
     </Router>

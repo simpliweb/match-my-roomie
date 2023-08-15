@@ -1,0 +1,11 @@
+.quiz-container {
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+}
+
+.quiz-image img {
+   width: 500px;
+   height: 300px;
+   display: block;
+}
