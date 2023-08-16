@@ -2,7 +2,7 @@ const Questions = [
   {
     question: 'Which gender do you prefer your roommate identify as?',
     options: ['Female', 'Male', 'Transgender', 'Nonbinary', 'No Preference'],
-    image: 'building.jpg'
+    image: 'playing-game.png',
   },
   {
     question: 'Which age group do you prefer your roommate belong to?',
@@ -17,7 +17,7 @@ const Questions = [
       '53-55 years old',
       '55+ years old',
     ],
-    image: 'building.jpg'
+    image: 'playing-game.png',
   },
   {
     question: 'Which type of living space are you looking for?',
@@ -27,7 +27,7 @@ const Questions = [
       'A bed in a Shared Bedroom',
       'No preference',
     ],
-    image: 'playing-game.png'
+    image: 'building.jpg',
   },
   {
     question:
@@ -37,7 +37,7 @@ const Questions = [
       'Social and lifestyle habits',
       'Financial Stability',
     ],
-    image: 'twofriends-moving.jpg'
+    image: 'twofriends-moving.jpg',
   },
 ];
 

@@ -49,66 +49,71 @@ function Quiz() {
   };
 
   return (
-    <div className='quiz-container' id='container'>
-      <div className='button-group'>
-        <button onClick={handlePreviousQuestion}>
+    <div className='container'>
+      <div className='inner-container'>
+        <button className='back-button' onClick={handlePreviousQuestion}>
           <i className='fas fa-arrow-left'></i>
           Back
         </button>
-      </div>
-      <div className='quiz-questions'>
-        <div className='progress-indicator-container'>
-          {Questions.map((_, index) => (
-            <div
-              key={index}
-              className={`progress-indicator ${
-                index <= currentQuestionIndex ? 'completed' : ''
-              }`}
-            ></div>
-          ))}
-        </div>
-        {currentQuestionIndex < Questions.length ? (
-          <div>
-            <h2>Quiz</h2>
-
-            <p>{Questions[currentQuestionIndex].question}</p>
-            <form>
-              {Questions[currentQuestionIndex].options.map((option, index) => (
-                <label key={index} className='option-label'>
-                  <input
-                    type='radio'
-                    value={option}
-                    checked={selectedOption === option}
-                    onChange={handleOptionChange}
-                  />
-                  {optionIcons[option] && (
-                    <img
-                      className='icon'
-                      src={optionIcons[option]}
-                      alt={option}
-                    />
-                  )}
-                  <span className='option-text'>{option}</span>
-                </label>
-              ))}
-            </form>
-            <div className='button-group'>
-              <button
-                onClick={handleNextQuestion}
-                disabled={isContinueDisabled}
-                className={
-                  isContinueDisabled
-                    ? 'continue-button disabled'
-                    : 'continue-button'
-                }
-              >
-                Continue
-              </button>
-            </div>
+        <div className='quiz-questions'>
+          <div className='progress-indicator-container'>
+            {Questions.map((_, index) => (
+              <div
+                key={index}
+                className={`progress-indicator ${
+                  index <= currentQuestionIndex ? 'completed' : ''
+                }`}
+              ></div>
+            ))}
           </div>
-        ) : (
-          <div>{/* navigate to results page? */}</div>
-        )}
+          {currentQuestionIndex < Questions.length ? (
+            <div className='inner-inner-container'>
+              <h2 className='inner-h2'>Roommate Preferences</h2>
+              <h3 className='quiz-h3'>
+                {Questions[currentQuestionIndex].question}
+              </h3>
+              <p className='inner-p'>
+                This information helps us find a roommate that will be a 
+                <span>
+                  good match for you. 
+                </span>
+              </p>
+              <form className='quiz-form'>
+                {Questions[currentQuestionIndex].options.map(
+                  (option, index) => (
+                    <label key={index} className='option-label'>
+                      <input
+                        type='radio'
+                        value={option}
+                        checked={selectedOption === option}
+                        onChange={handleOptionChange}
+                      />
+                      {optionIcons[option] && (
+                        <img
+                          className='icon'
+                          src={optionIcons[option]}
+                          alt={option}
+                        />
+                      )}
+                      <span className='option-text'>{option}</span>
+                    </label>
+                  )
+                )}
+              </form>
+              <div className='next-button'>
+                <button
+                  onClick={handleNextQuestion}
+                  disabled={isContinueDisabled}
+                  className=                   {`continue-button ${isContinueDisabled ? 'disabled' : 'filled-button'}`}
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>{/* navigate to results page? */}</div>
+          )}
+        </div>
       </div>
       <div className='quiz-image'>
         {currentQuestionIndex <= 1 && (

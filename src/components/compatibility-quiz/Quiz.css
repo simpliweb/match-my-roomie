@@ -5,13 +5,15 @@
 }
 
 /* Styling for the progress bar container */
-.progress-bar-container {
-  margin-bottom: 20px; 
+.progress-indicator-container {
+  margin-left: 14%;
+  margin-bottom: 50px; 
 }
-
 
 /* Styling for the progress indicators */
 .progress-indicator {
+  float: left;  
+  /* margin-left: 12%; */
   display: inline-flex;
   margin-right: 20px; 
   width: 65px;
@@ -22,5 +24,39 @@
 
 /* Styling for completed progress indicators */
 .progress-indicator.completed {
+  background-color: #4488C5;
+}
+
+.quiz-h3 {
+    font-size: 1.4rem;
+    font-family: Medium;
+    text-align: left;
+    margin: 5% 0 5% 12%;
+}
+
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+  /* float: left; */
+}
+
+.option-label {
+  text-align: left;
+  font-family: Regular;
+  margin: 0 1.5% 5% 10%;  
+}
+
+.quiz-image img {
+  width: 100%;
+  height: 100vh;
+  display: block;
+}
+
+.next-button {
+  float: left;
+  margin: 3% 0 0 10%;
+}
+
+.continue-button.filled-button {
   background-color: #4488C5;
 }
