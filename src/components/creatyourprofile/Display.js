@@ -179,7 +179,7 @@ function Display() {
       <div className='info-side'>
         <img
           src={require('../../assets/images/results-card-blurry.png')}
-          alt='matched user profile with image and details'
+          alt='matched user profile with profile and details'
         />
       </div>
     </div>
