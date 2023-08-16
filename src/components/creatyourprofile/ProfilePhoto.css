@@ -2,18 +2,26 @@
     display: flex;
 }
 
+.profilephoto-form {
+  display: flex;
+  flex-direction: column;
+}
+
 #all-profilephoto {
     background-color: #4488C5;
 }
 
 .custom-file-upload {
-  display: inline-block;
+  margin: auto;
+  margin-top: 20px;
   cursor: pointer;
-  border: 1px solid #ccc;
-  padding: 6px 12px;
-  border-radius: 4px;
-  background-color: #f2f2f2;
-  color: #333;
+  padding: 6px 0;
+  width: 25%;
+  border-radius: 8px;
+  background-color: #ffff;
+  border: 2px solid #4488C5;
+  color: #4488C5;
+  font-family: Bold;
 }
 
 .custom-file-upload input[type='file'] {
@@ -41,19 +49,20 @@
 }
 
 .image-preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  margin: auto;
   width: 150px;
   height: 150px;
   border-radius: 50%;
   overflow: hidden;
   background-color: #f2f2f2;
-  border: 
+  border: 2px solid #000000;
 }
 
 .image-preview img {
   max-width: 100%;
   max-height: 100%;
+}
+
+#profilephoto-buttons {
+  margin-top: 40px;
 }
