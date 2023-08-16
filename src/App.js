@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import Main from './components/Main';
-import Signup from './components/Signup';
+import SignUp from './components/SignUp';
 import Display from './components/creatyourprofile/Display';
 import Gender from './components/creatyourprofile/Gender';
 import Biography from './components/creatyourprofile/Biography';
@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='/home' element={<Main />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/signup' element={<SignUp />} />
           <Route path='/display' element={<Display />} />
           <Route path='/gender' element={<Gender />} />
           <Route path='/biography' element={<Biography />} />

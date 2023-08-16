@@ -2,10 +2,10 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import '../assets/styles/Signup.css';
+import '../assets/styles/SignUp.css';
 
 
-function Signup() {
+function SignUp() {
   const {
     control,
     handleSubmit,
@@ -16,7 +16,7 @@ function Signup() {
 
   const navigate = useNavigate();
 
-	const [error, setError] = useState('');
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [signUpCompleted, setSignUpCompleted] = useState(false);
@@ -27,8 +27,8 @@ function Signup() {
 
   const handleFormValidation = async () => {
     const isValid = await trigger(); // Manually trigger form validation
-    setIsFormValid(isValid);  
-  };  
+    setIsFormValid(isValid);
+  };
 
   const onSubmit = async (formData) => {
     // console.log(data)
@@ -220,4 +220,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignUp;
