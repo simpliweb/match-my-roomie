@@ -42,7 +42,7 @@ function ProfilePhoto() {
           Back
         </button>
         <div className='profilephoto-info-container'>
-          <div className='progress-bar'>
+          <div className='create-progress-bar'>
             <div className='rectangle' id='all-profilephoto'></div>
             <div className='rectangle' id='all-profilephoto'></div>
             <div className='rectangle' id='all-profilephoto'></div>
@@ -77,7 +77,7 @@ function ProfilePhoto() {
                       }}
                       placeholder='Upload Photo'
                     />
-                    <span>{isDirty ? 'Uploaded' : 'Upload Photo'}</span>
+                    <span>{isDirty ? 'Upload' : 'Upload Photo'}</span>
                     {isDirty && errors.image && (
                       <p className='error-message'>{errors.image.message}</p>
                     )}
@@ -88,10 +88,10 @@ function ProfilePhoto() {
             <div className='button-group' id='profilephoto-buttons'>
               <button
                 type='submit'
-                className={`continue-button ${isDirty ? 'uploaded' : ''}`}
+                className={`continue-button ${isDirty ? 'continue' : ''}`}
                 disabled={!isDirty}
               >
-                {isDirty ? 'Uploaded' : 'Upload'}
+                {isDirty ? 'continue' : 'continue'}
                 {/* Continue */}
               </button>
               <button type='button' className='skip-button' onClick={handleSkip}>
@@ -104,7 +104,7 @@ function ProfilePhoto() {
 
       <div className='info-side'>
         <img
-          src={require('../../assets/images/results-card-blurry.png')}
+          src={require('../../assets/images/results-card.png')}
           alt='matched user profile with image and details'
         />
       </div>

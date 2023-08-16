@@ -85,7 +85,7 @@ button {
   padding: 10px 45px 12px;
 }
 
-.submit-button.filled {
+.continue-button.filled {
   background-color: #4488C5; 
 }
 
@@ -106,6 +106,7 @@ button {
     flex-direction: column;
     text-align: left;
 }
+
 
 @font-face {
   font-family: "Dark";

@@ -45,7 +45,7 @@ function Biography() {
           <i className='fas fa-arrow-left'></i>
           Back
         </button>
-        <div className='progress-bar'>
+        <div className='create-progress-bar'>
           <div className='rectangle' id='first-bio'></div>
           <div className='rectangle' id='second-bio'></div>
           <div className='rectangle' id='third-bio'></div>
@@ -115,7 +115,7 @@ function Biography() {
       </div>
       <div className='info-side'>
         <img
-          src={require('../../assets/images/results-card-blurry.png')}
+          src={require('../../assets/images/results-card.png')}
           alt='matched user profile with image and details'
         />
       </div>

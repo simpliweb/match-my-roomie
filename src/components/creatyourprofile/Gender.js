@@ -47,7 +47,7 @@ function Gender() {
           Back
         </button>
         <div className='gender-info-container'>
-          <div className='progress-bar'>
+          <div className='create-progress-bar'>
             <div className='rectangle' id='first-gender'></div>
             <div className='rectangle' id='second-gender'></div>
             <div className='rectangle' id='third-gender'></div>

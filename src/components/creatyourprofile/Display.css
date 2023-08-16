@@ -5,7 +5,7 @@
     align-items: flex-start;
 }
 
-.progress-bar {
+.display-progress-bar {
     display: flex;
     align-items: flex-start;
     gap: 24px;
@@ -101,8 +101,11 @@
     color: #ffff;
     font-family: medium;
     padding: 8px 30px 10px;
-    background-color: #4488C5;
+    background-color: #717171;
     border: inherit;
     font-size: 1.2rem;
 }
 
+.profile-continue-button.completed {
+    background-color: #4488C5;
+}

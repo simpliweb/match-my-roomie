@@ -49,7 +49,7 @@ function Quiz() {
   };
 
   return (
-    <div className='quiz-container'>
+    <div className='quiz-container' id='container'>
       <div className='button-group'>
         <button onClick={handlePreviousQuestion}>
           <i className='fas fa-arrow-left'></i>

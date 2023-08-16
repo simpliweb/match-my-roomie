@@ -1,3 +1,9 @@
+.create-progress-bar {
+    display: flex;
+    margin: 3% 0 7% 12%;
+    gap: 24px;
+}
+
 #first-gender, #second-gender {
     background-color: #4488C5;
 }
@@ -24,3 +30,4 @@
 .other-input {
     display: inline-flex;
 }
+

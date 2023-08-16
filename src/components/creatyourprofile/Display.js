@@ -11,7 +11,7 @@ function Display() {
     handleSubmit,
     // reset,
     // trigger,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm();
 
   const navigate = useNavigate();
@@ -56,9 +56,9 @@ function Display() {
 //   };
 
   return (
-    <div className='profile-container'>
+    <div className='container'>
       <div className='profile-create-info'>
-        <div className='progress-bar'>
+        <div className='display-progress-bar'>
           <div className='rectangle' id='first'></div>
           <div className='rectangle' id='second'></div>
           <div className='rectangle' id='third'></div>
@@ -163,7 +163,12 @@ function Display() {
               All users must be at leats 18 years or older. We use age to ensure
               the most accurate matches.
             </p>
-            <button className='profile-continue-button' type='submit'>
+            <button
+              className={`profile-continue-button ${
+                isValid ? 'completed' : ''
+              }`}
+              type='submit'
+            >
               Continue
             </button>
           </div>
