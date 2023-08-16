@@ -1,7 +1,8 @@
 // import axios from 'axios';
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';import { FaArrowDown } from 'react-icons/fa';
+import { useForm, Controller } from 'react-hook-form';
 import './Display.css';
 
 
@@ -16,9 +17,9 @@ function Display() {
 
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [signUpCompleted, setSignUpCompleted] = useState(false);
+  // const [error, setError] = useState('');
+  // const [isFormValid, setIsFormValid] = useState(false);
+  // const [signUpCompleted, setSignUpCompleted] = useState(false);
 
 //   const handleFormValidation = async () => {
 //     const isValid = await trigger(); // Manually trigger form validation

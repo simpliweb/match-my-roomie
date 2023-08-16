@@ -7,7 +7,7 @@ function Gender() {
   const question = 'Which gender do you identify with?';
   const options = ['Female', 'Male', 'Transgender', 'Nonbinary'];
   const [selectedOption, setSelectedOption] = useState('');
-  const [customOption, setCustomOption] = useState('');
+  const [setCustomOption] = useState('');
 
   const navigate = useNavigate();
 
@@ -146,6 +146,8 @@ function Gender() {
               Continue
             </button>
           </form>
+          {/* Example usage of 'customOption' */}
+          {/* {customOption && <p>Signup completed!</p>} */}
         </div>
         {/* <button type='submit' onClick={handleFormValidation}>
         Continue

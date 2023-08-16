@@ -14,9 +14,9 @@ function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState('');
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
-  const currentQuestion = Questions[currentQuestionIndex];
-  const progressPercentage =
-    (currentQuestionIndex / (Questions.length - 1)) * 100;
+  // const currentQuestion = Questions[currentQuestionIndex];
+  // const progressPercentage =
+  //   (currentQuestionIndex / (Questions.length - 1)) * 100;
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -70,9 +70,6 @@ function Quiz() {
         {currentQuestionIndex < Questions.length ? (
           <div>
             <h2>Quiz</h2>
-            <p>
-              Question {currentQuestionIndex + 1}/{Questions.length}
-            </p>
 
             <p>{Questions[currentQuestionIndex].question}</p>
             <form>
@@ -117,14 +114,14 @@ function Quiz() {
         {currentQuestionIndex <= 1 && (
           <img
             src={require('../../assets/images/' + Questions[0].image)}
-            alt='Common Image'
+            alt='buildings'
           />
         )}
         {currentQuestionIndex >= 2 && (
           <img
             src={require('../../assets/images/' +
               Questions[currentQuestionIndex].image)}
-            alt={`Question ${currentQuestionIndex + 1} Image`}
+            alt={`female playing game and hodlign a box`}
           />
         )}
       </div>

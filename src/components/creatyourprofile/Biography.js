@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { FaArrowDown } from 'react-icons/fa';
 import './Biography.css';
 
 function Biography() {

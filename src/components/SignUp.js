@@ -16,10 +16,10 @@ function SignUp() {
 
   const navigate = useNavigate();
 
-  const [error, setError] = useState('');
+  const [setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
-  const [signUpCompleted, setSignUpCompleted] = useState(false);
+  const [setSignUpCompleted] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -64,7 +64,6 @@ function SignUp() {
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          className='container'
         >
           {/* email */}
           <label className='account-create-label'>
@@ -203,6 +202,10 @@ function SignUp() {
             </button>
           </div>
         </form>
+
+        {/* Example usage of 'error' and 'signUpCompleted' */}
+        {/* {error && <p>Error: {error}</p>} */}
+        {/* {signUpCompleted && <p>Signup completed!</p>} */}
 
         <div className='account-check'>
           Already have an account? <button>Sign in</button>
