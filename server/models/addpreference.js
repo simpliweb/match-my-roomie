@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 
 const tutSchema = new mongoose.Schema({
-  genderPreference: {
-    type: String,
-  },
-  accommodationType: {
-    type: String,
-  },
-  preferredAge: {
-    type: String,
-  },
-  topPreference: {
+  // genderPreference: {
+  //   type: String,
+  // },
+  // accommodationType: {
+  //   type: String,
+  // },
+  // preferredAge: {
+  //   type: String,
+  // },
+  // topPreference: {
+  //   type: String,
+  // },
+  questionSelections:  {
     type: String,
   },
 });
