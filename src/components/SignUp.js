@@ -6,6 +6,22 @@ import '../assets/styles/SignUp.css';
 
 
 function SignUp() {
+
+  // const [form, setform] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   email:'',
+  //   password:'',
+  // });
+
+  // const handleChange = (e) => {
+  //   console.log(e.target.value);
+  //   setform({
+  //     ...form,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
   const {
     control,
     handleSubmit,
@@ -33,12 +49,11 @@ function SignUp() {
   };
 
   const onSubmit = async (formData) => {
-    // console.log(data)
     try {
       const url = 'http://localhost:8000/user/signup';
       const { data: res } = await axios.post(url, formData);
       console.log(res.message);
-
+ 
       // Clear the form after successful submission
       reset();
 
