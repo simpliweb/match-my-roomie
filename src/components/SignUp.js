@@ -11,23 +11,25 @@ function SignUp() {
     handleSubmit,
     reset,
     trigger,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm();
 
   const navigate = useNavigate();
 
-  const [setError] = useState('');
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
-  const [setSignUpCompleted] = useState(false);
+  const [signUpCompleted, setSignUpCompleted] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   const handleFormValidation = async () => {
-    const isValid = await trigger(); // Manually trigger form validation
-    setIsFormValid(isValid);
+    const isValidForm  = await trigger(); // Manually trigger form validation
+    setIsFormValid(isValidForm);
+    setIsFormSubmitted(true);;
   };
 
   const onSubmit = async (formData) => {
@@ -61,10 +63,7 @@ function SignUp() {
     <div className='sign-up-container'>
       <div className='account-create'>
         <h2 className='account-create-h2'>Create an Account</h2>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
           {/* email */}
           <label className='account-create-label'>
             Email
@@ -196,17 +195,16 @@ function SignUp() {
               </ul>
             )} */}
           </label>
-          <div className={`signup-button ${isFormValid ? 'blue-button' : ''}`}>
+          <div
+            className={`signup-button ${
+              isFormSubmitted && isValid ? 'filled-button' : ''
+            }`}
+          >
             <button type='submit' onClick={handleFormValidation}>
               Sign Up
             </button>
           </div>
         </form>
-
-        {/* Example usage of 'error' and 'signUpCompleted' */}
-        {/* {error && <p>Error: {error}</p>} */}
-        {/* {signUpCompleted && <p>Signup completed!</p>} */}
-
         <div className='account-check'>
           Already have an account? <button>Sign in</button>
         </div>
