@@ -13,9 +13,11 @@ const tutSchema = new mongoose.Schema({
   // topPreference: {
   //   type: String,
   // },
-  questionSelections:  {
-    type: String,
-  },
+  selectedOption: [
+    {
+      type: String,
+    },
+  ],
 });
 
 const UserPreference = new mongoose.model("User Preference", tutSchema);

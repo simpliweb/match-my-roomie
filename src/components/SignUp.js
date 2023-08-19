@@ -5,23 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import '../assets/styles/SignUp.css';
 
 
-function SignUp() {
-
-  // const [form, setform] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   email:'',
-  //   password:'',
-  // });
-
-  // const handleChange = (e) => {
-  //   console.log(e.target.value);
-  //   setform({
-  //     ...form,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
+function SignUp() {  
   const {
     control,
     handleSubmit,
@@ -76,6 +60,15 @@ function SignUp() {
 
   return (
     <div className='sign-up-container'>
+      {/* Display error message if there is an error */}
+      {/* {error && <p className='error-message'>{error}</p>} */}
+
+      {/* Display sign-up completed message if sign-up is successful */}
+      {/* {signUpCompleted && (
+        <p className='success-message'>
+          Sign-up successful! You can now sign in.
+        </p>
+      )} */}
       <div className='account-create'>
         <h2 className='account-create-h2'>Create an Account</h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -99,8 +92,6 @@ function SignUp() {
                   {...field}
                   type='email'
                   placeholder='email@matchmyroomie.com'
-                  // value={data.email}
-                  // onChange={handleChange}
                 />
               )}
             />
@@ -124,8 +115,6 @@ function SignUp() {
                     {...field}
                     type='text'
                     placeholder='Jane'
-                    // value={data.firstName}
-                    // onChange={handleChange}
                   />
                 )}
               />
@@ -148,8 +137,6 @@ function SignUp() {
                     {...field}
                     type='text'
                     placeholder='Doe'
-                    // value={data.lastName}
-                    // onChange={handleChange}
                   />
                 )}
               />
@@ -172,10 +159,10 @@ function SignUp() {
                   value: 8,
                   message: 'Password must be at least 8 characters long.',
                 },
-                pattern: {
-                  value: /^(?=.*[!@#$%^&*])/,
-                  message: 'Password must contain at least one symbol.',
-                },
+                // pattern: {
+                //   value: /^(?=.*[!@#$%^&*])/,
+                //   message: 'Password must contain at least one symbol.',
+                // },
               }}
               render={({ field }) => (
                 <div className='password-input'>
@@ -183,11 +170,7 @@ function SignUp() {
                     className='account-create-input'
                     {...field}
                     type={showPassword ? 'text' : 'password'}
-                    // value={password}
-                    // onChange={handlePasswordChange}
                     placeholder='*********'
-                    // value={data.password}
-                    // onChange={handleChange}
                   />
                   <i
                     className={showPassword ? 'far fa-eye' : 'far fa-eye-slash'}
@@ -202,13 +185,6 @@ function SignUp() {
                 {errors.password.message}
               </p>
             )}
-            {/* {errors.password && (
-              <ul className='password-error-message'>
-                Your password must contain:
-                <li>a symbol</li>
-                <li>a minimum of 8 characters</li>
-              </ul>
-            )} */}
           </label>
           <div
             className={`signup-button ${
