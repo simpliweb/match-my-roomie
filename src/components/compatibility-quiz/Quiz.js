@@ -16,10 +16,27 @@ function Quiz() {
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [selectedOption, setSelectedOption] = useState('');
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-    setIsContinueDisabled(false);
-  };
+  // const handleOptionChange = (event) => {
+  //   setSelectedOption(event.target.value);
+  //   setIsContinueDisabled(false);
+  // };
+
+    const [formData, setFormData] = useState({
+      genderPreference: '',
+      accommodationType: '',
+      preferredAge: '',
+      topPreference: '',
+    });
+
+    // ...
+
+    const handleOptionChange = (fieldName, option) => {
+      setFormData((prevData) => ({
+        ...prevData,
+        [fieldName]: option,
+      }));
+      setIsContinueDisabled(false);
+    };
 
   const handleNextQuestion = () => {
     console.log('handleNextQuestion is working ' + currentQuestionIndex);
@@ -53,10 +70,11 @@ function Quiz() {
 
       const response = await fetch('http://localhost:8000/addpreference', {
         method: 'POST',
-        body: JSON.stringify({
-          questionIndex: currentQuestionIndex,
-          selectedOption: selectedOption,
-        }),
+        // body: JSON.stringify({
+        //   questionIndex: currentQuestionIndex,
+        //   selectedOption: selectedOption,
+        // }),
+        body: JSON.stringify(formData),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -114,17 +132,23 @@ function Quiz() {
               {Questions[currentQuestionIndex].options.map((option, index) => (
                 <label key={index} className='option-label'>
                   <Controller
-                    name={`question${currentQuestionIndex}`}
+                    // name={`question${currentQuestionIndex}`}
+                    name={Questions[currentQuestionIndex].fieldName}
                     control={control}
                     render={({ field }) => (
                       <input
                         {...field}
                         type='radio'
                         value={option}
-                        checked={selectedOption === option}
+                        // checked={selectedOption === option}
+                        checked={field.value === option}
                         onChange={(e) => {
                           field.onChange(e);
-                          handleOptionChange(e);
+                          // handleOptionChange(e);
+                          handleOptionChange(
+                            Questions[currentQuestionIndex].fieldName,
+                            option
+                          );
                         }}
                       />
                     )}
