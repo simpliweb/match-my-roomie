@@ -178,15 +178,17 @@ function Quiz() {
                 </div>
               ) : null}
               {currentQuestionIndex === Questions.length - 1 && (
-                <button
-                  type='submit'
-                  disabled={isContinueDisabled}
-                  className={`continue-button ${
-                    isContinueDisabled ? 'disabled' : 'filled-button'
-                  }`}
-                >
-                  Submit
-                </button>
+                <div className='quiz-submit-button'>
+                  <button
+                    type='submit'
+                    disabled={isContinueDisabled}
+                    className={`continue-button ${
+                      isContinueDisabled ? 'disabled' : 'filled-button'
+                    }`}
+                  >
+                    Submit
+                  </button>
+                </div>
               )}
             </form>
           </div>

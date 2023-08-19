@@ -52,8 +52,8 @@
   display: block;
 }
 
-.next-button {
-  float: left;
+.next-button, .quiz-submit-button {
+  text-align: left;
   margin: 3% 0 0 10%;
 }
 
