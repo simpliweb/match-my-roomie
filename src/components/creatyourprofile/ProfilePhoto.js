@@ -1,20 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import './ProfilePhoto.css';
 
-function ProfilePhoto() {
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    navigate(-1); 
-  };
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isDirty },
-  } = useForm();
+function ProfilePhoto({ formMethods }) {
 
   const [uploadedImage, setUploadedImage] = useState(null);
 
@@ -25,22 +13,9 @@ function ProfilePhoto() {
     }
   };
 
-  const onSubmit = (data) => {
-    console.log('Submitted data:', data);
-    navigate('/success');
-  };
-
-  const handleSkip = () => {
-    navigate('/success');
-  };
-
   return (
     <div className='container'>
-      <div className='inner-container'>
-        <button className='back-button' onClick={handleGoBack}>
-          <i className='fas fa-arrow-left'></i>
-          Back
-        </button>
+      <div className='inner-container'>       
         <div className='profilephoto-info-container'>
           <div className='create-progress-bar'>
             <div className='rectangle' id='all-profilephoto'></div>
@@ -55,15 +30,14 @@ function ProfilePhoto() {
             The information will be shown on your MatchMyRoomie
             <span>profile to help potential roommates get to know you.</span>
           </p>
-
-          <form className='profilephoto-form' onSubmit={handleSubmit(onSubmit)}>
+          <div className='profilephoto-form'>
             <div className='image-preview'>
               {uploadedImage && <img src={uploadedImage} alt='Uploaded' />}
             </div>
             <label className='custom-file-upload'>
               <Controller
                 name='image'
-                control={control}
+                control={formMethods.control}
                 defaultValue=''
                 rules={{ required: 'Image is required.' }}
                 render={({ field }) => (
@@ -77,28 +51,17 @@ function ProfilePhoto() {
                       }}
                       placeholder='Upload Photo'
                     />
-                    <span>{isDirty ? 'Upload' : 'Upload Photo'}</span>
-                    {isDirty && errors.image && (
-                      <p className='error-message'>{errors.image.message}</p>
+                    <span>{formMethods.isValid ? 'Upload' : 'Upload Photo'}</span>
+                    {formMethods.isValid && formMethods.formState.errors.image && (
+                      <p className='error-message'>
+                        {formMethods.formState.errors.image.message}
+                      </p>
                     )}
                   </div>
                 )}
               />
-            </label>
-            <div className='button-group' id='profilephoto-buttons'>
-              <button
-                type='submit'
-                className={`continue-button ${isDirty ? 'continue' : ''}`}
-                disabled={!isDirty}
-              >
-                {isDirty ? 'continue' : 'continue'}
-                {/* Continue */}
-              </button>
-              <button type='button' className='skip-button' onClick={handleSkip}>
-                Not Now
-              </button>
-            </div>
-          </form>
+            </label>   
+          </div>
         </div>
       </div>
 

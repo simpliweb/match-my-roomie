@@ -45,7 +45,7 @@ function SignUp() {
       setSignUpCompleted(true);
 
       // Navigate to another page
-      navigate('/display');
+      navigate('/createprofile');
     } catch (error) {
       if (
         error.response &&

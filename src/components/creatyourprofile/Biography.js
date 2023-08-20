@@ -1,49 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import './Biography.css';
 
-function Biography() {
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    navigate(-1); 
-  };
-
+function Biography({ formMethods }) {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  const onSubmit = (data) => {
-     console.log('Submitted value:', data.textInput);
-     navigate('/profilephoto');
-
-  };
-
-  const handleSkip = () => {
-    navigate('/profilephoto');
-  };
-
-  // const handleFormValidation = async () => {
-  //   const isValid = await trigger(); // Manually trigger form validation
-  //   setIsFormValid(isValid);
-  // };
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
   return (
     <div className='container'>
       <div className='inner-container'>
-        <button className='back-button' onClick={handleGoBack}>
-          <i className='fas fa-arrow-left'></i>
-          Back
-        </button>
         <div className='create-progress-bar'>
           <div className='rectangle' id='first-bio'></div>
           <div className='rectangle' id='second-bio'></div>
@@ -60,13 +28,13 @@ function Biography() {
             The information will be shown on your MatchMyRoomie
             <span>profile to help potential roommates get to know you.</span>
           </p>
-          <form className='biography-form' onSubmit={handleSubmit(onSubmit)}>
+          <div className='biography-form'>
             <div className='biography-label'>
               <label className='biography-label-label'>
                 About Me
                 <Controller
                   name='textInput'
-                  control={control}
+                  control={formMethods.control}
                   defaultValue=''
                   rules={{ required: 'Please fill out your biography.' }}
                   render={({ field }) => (
@@ -83,34 +51,15 @@ function Biography() {
                     />
                   )}
                 />
-                {errors.textInput && (
-                  <p className='error-message'>{errors.textInput.message}</p>
+                {formMethods.formState.errors.textInput && (
+                  <p className='error-message'>
+                    {formMethods.formState.errors.textInput.message}
+                  </p>
                 )}
               </label>
             </div>
-            <div className='button-group'>
-              <button
-                type='submit'
-                className={`continue-button ${
-                  inputValue.trim() !== '' ? 'filled' : ''
-                }`}
-                disabled={Object.keys(errors).length > 0}
-              >
-                Continue
-              </button>
-              <button
-                className='skip-button'
-                type='button'
-                onClick={handleSkip}
-              >
-                Not Now
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
-        {/* <button type='submit' onClick={handleFormValidation}>
-        Continue
-      </button> */}
       </div>
       <div className='info-side'>
         <img

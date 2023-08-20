@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import './Gender.css';
 
-function Gender() {
+function Gender({ formMethods }) {
   const question = 'Which gender do you identify with?';
   const options = ['Female', 'Male', 'Transgender', 'Nonbinary'];
   const [selectedOption, setSelectedOption] = useState('');
   const [setCustomOption] = useState('');
-
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    navigate(-1);
-  };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -24,28 +17,9 @@ function Gender() {
     setCustomOption(event.target.value);
   };
 
-  // const handleFormValidation = async () => {
-  //   const isValid = await trigger(); // Manually trigger form validation
-  //   setIsFormValid(isValid);
-  // };
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm();
-
-  const onSubmit = async () => {
-    navigate('/biography');
-  };
-
   return (
     <div className='container'>
       <div className='inner-container'>
-        <button className='back-button' onClick={handleGoBack}>
-          <i className='fas fa-arrow-left'></i>
-          Back
-        </button>
         <div className='gender-info-container'>
           <div className='create-progress-bar'>
             <div className='rectangle' id='first-gender'></div>
@@ -60,12 +34,12 @@ function Gender() {
             The information will be shown on your MatchMyRoomie
             <span>profile to help potential roommates get to know you.</span>
           </p>
-          <form className='gender-form' onSubmit={handleSubmit(onSubmit)}>
+          <div className='gender-form'>
             {options.map((option) => (
               <label key={option}>
                 <Controller
                   name='gender'
-                  control={control}
+                  control={formMethods.control}
                   defaultValue=''
                   rules={{ required: 'Please select a gender.' }}
                   render={({ field }) => (
@@ -83,15 +57,17 @@ function Gender() {
                     </div>
                   )}
                 />
-                {errors.gender && ( // Display error message
-                  <p className='error-message'>{errors.gender.message}</p>
+                {formMethods.formState.errors.gender && ( // Display error message
+                  <p className='error-message'>
+                    {formMethods.formState.errors.gender.message}
+                  </p>
                 )}
               </label>
             ))}
             <label>
               <Controller
                 name='gender'
-                control={control}
+                control={formMethods.control}
                 defaultValue=''
                 rules={{ required: 'Please select a gender.' }}
                 render={({ field }) => (
@@ -110,7 +86,7 @@ function Gender() {
               Other{' '}
               <Controller
                 name='customOption'
-                control={control}
+                control={formMethods.control}
                 defaultValue=''
                 rules={{
                   required:
@@ -121,7 +97,6 @@ function Gender() {
                 render={({ field }) => (
                   <div>
                     <input
-                      // className='other-input'
                       type='text'
                       value={field.value}
                       onChange={(e) => {
@@ -130,28 +105,17 @@ function Gender() {
                       }}
                       disabled={selectedOption !== 'Other'}
                     />
-                    {errors.customOption && ( // Display error message
+                    {formMethods.formState.errors.customOption && ( // Display error message
                       <p className='error-message'>
-                        {errors.customOption.message}
+                        {formMethods.formState.errors.customOption.message}
                       </p>
                     )}
                   </div>
                 )}
               />
             </label>
-            <button
-              type='submit'
-              className={`continue-button ${isValid ? 'filled' : ''}`}
-            >
-              Continue
-            </button>
-          </form>
-          {/* Example usage of 'customOption' */}
-          {/* {customOption && <p>Signup completed!</p>} */}
+          </div>
         </div>
-        {/* <button type='submit' onClick={handleFormValidation}>
-        Continue
-      </button> */}
       </div>
       <div className='info-side'>
         <img
