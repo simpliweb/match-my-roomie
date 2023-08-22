@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const createProfileSchema = new mongoose.Schema({
-  Name: {
+  firstName: {
     type: String,
   },
   lastName: {
@@ -14,6 +14,9 @@ const createProfileSchema = new mongoose.Schema({
     type: String,
   },
   about: {
+    type: String,
+  },
+  photo: {
     type: String,
   },
 });

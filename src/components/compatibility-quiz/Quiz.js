@@ -69,6 +69,7 @@ function Quiz() {
       token = JSON.parse(token)?.authToken;
 
       const response = await fetch('http://localhost:8000/addpreference', {
+        // http://localhost:8000/addpreference
         method: 'POST',
         // body: JSON.stringify({
         //   questionIndex: currentQuestionIndex,

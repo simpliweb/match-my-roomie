@@ -15,7 +15,7 @@ function ProfilePhoto({ formMethods }) {
 
   return (
     <div className='container'>
-      <div className='inner-container'>       
+      {/* <div className='inner-container'>        */}
         <div className='profilephoto-info-container'>
           <div className='create-progress-bar'>
             <div className='rectangle' id='all-profilephoto'></div>
@@ -36,7 +36,7 @@ function ProfilePhoto({ formMethods }) {
             </div>
             <label className='custom-file-upload'>
               <Controller
-                name='image'
+                name='photo'
                 control={formMethods.control}
                 defaultValue=''
                 rules={{ required: 'Image is required.' }}
@@ -63,7 +63,7 @@ function ProfilePhoto({ formMethods }) {
             </label>   
           </div>
         </div>
-      </div>
+      {/* </div> */}
 
       <div className='info-side'>
         <img

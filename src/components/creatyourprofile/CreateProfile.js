@@ -7,6 +7,7 @@ import Gender from './Gender';
 import Biography from './Biography';
 import ProfilePhoto from './ProfilePhoto';
 // import Success from './Success';
+import './CreateProfile.css';
 
 function CreateProfile() {
   const [page, setPage] = useState(0);
@@ -99,7 +100,7 @@ function CreateProfile() {
       let token = localStorage.getItem('token');
       token = JSON.parse(token)?.authToken;
 
-      const response = await fetch('http://localhost:8000/createprofile', {
+      const response = await fetch('https://mmr2.onrender.com/createprofile', {
         method: 'POST',
         // body: JSON.stringify({
         //   questionIndex: currentQuestionIndex,
@@ -136,12 +137,14 @@ function CreateProfile() {
 
   return (
     <form className='create-profile-forms-container'>
-      <div className='progress-indicator-container'></div>
-      <button className='back-button' onClick={handleGoBack}>
-        <i className='fas fa-arrow-left'></i>
-        Back
-      </button>
-      <div>{PageDisplay()}</div>
+      {/* <div className='progress-indicator-container'></div> */}
+      {page !== 0 && (
+        <button className='back-button' onClick={handleGoBack}>
+          <i className='fas fa-arrow-left'></i>
+          Back
+        </button>
+      )}
+      <div className='all-forms'>{PageDisplay()}</div>
       <div className='button-group'>
         <button
           type='button'

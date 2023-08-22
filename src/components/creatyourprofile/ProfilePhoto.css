@@ -1,5 +1,8 @@
-.profilephoto-container {
-    display: flex;
+.profilephoto-info-container{
+  padding: 13% 9% 0;
+  display: inline-flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
 }
 
 .profilephoto-form {
@@ -16,7 +19,7 @@
   margin-top: 20px;
   cursor: pointer;
   padding: 6px 0;
-  width: 25%;
+  width: 30%;
   border-radius: 8px;
   background-color: #ffff;
   border: 2px solid #4488C5;
@@ -38,6 +41,12 @@
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+}
+
+.continue-button.submit-button {
+  margin: 0;
+  align-items: left;
+  width: 180px;
 }
 
 .continue-button.continue {

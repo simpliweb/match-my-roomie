@@ -1,14 +1,15 @@
 .profile-create-info {
-    padding: 15% 10%;
+    padding: 13% 9% 0;
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.display-progress-bar {
+.create-progress-bar {
     display: flex;
     align-items: flex-start;
     gap: 24px;
+    /* margin-left: 0;     */
 }
 
 .rectangle {

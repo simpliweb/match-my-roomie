@@ -1,0 +1,24 @@
+
+.create-profile-forms-container {
+    position: relative;
+}
+
+.back-button {
+    position: absolute;    
+    float: left;
+    left: 0;
+    margin: 90px 0 0 30px;
+}
+
+.all-forms {
+    z-index: -1;
+}
+
+.button-group {    
+    margin-top: -14%;
+    margin-left: 9%;
+}
+.continue-button {
+    z-index: 10;
+}
+

@@ -19,7 +19,7 @@ function Gender({ formMethods }) {
 
   return (
     <div className='container'>
-      <div className='inner-container'>
+      {/* <div className='inner-container'> */}
         <div className='gender-info-container'>
           <div className='create-progress-bar'>
             <div className='rectangle' id='first-gender'></div>
@@ -27,7 +27,6 @@ function Gender({ formMethods }) {
             <div className='rectangle' id='third-gender'></div>
             <div className='rectangle' id='fourth-gender'></div>
           </div>
-
           <h2 className='inner-h2'>Create Your Profile</h2>
           <h3 className='inner-h3'>{question}</h3>
           <p className='inner-p'>
@@ -116,7 +115,7 @@ function Gender({ formMethods }) {
             </label>
           </div>
         </div>
-      </div>
+      {/* </div> */}
       <div className='info-side'>
         <img
           src={require('../../assets/images/results-card-blurry.png')}
