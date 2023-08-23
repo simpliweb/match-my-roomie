@@ -33,11 +33,13 @@ function SignUp() {
   };
 
   const onSubmit = async (formData) => {
+    console.log(formData)
     try {
-      const url = 'https://mmr2.onrender.com/signup';
+      const url = 'https://mmr2.onrender.com/user/signup';
       const { data: res } = await axios.post(url, formData);
-      console.log(res.message);
- 
+      // console.log(res.message);
+      console.log(res)
+      
       // Clear the form after successful submission
       reset();
 
@@ -45,7 +47,7 @@ function SignUp() {
       setSignUpCompleted(true);
 
       // Navigate to another page
-      navigate('/createprofile');
+      navigate(`/createprofile/${res.data.userId}`);
     } catch (error) {
       if (
         error.response &&

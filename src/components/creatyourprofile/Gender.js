@@ -6,7 +6,7 @@ function Gender({ formMethods }) {
   const question = 'Which gender do you identify with?';
   const options = ['Female', 'Male', 'Transgender', 'Nonbinary'];
   const [selectedOption, setSelectedOption] = useState('');
-  const [setCustomOption] = useState('');
+  const [isCustomOption, setCustomOption] = useState('');
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);

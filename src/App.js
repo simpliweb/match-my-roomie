@@ -21,15 +21,14 @@ function App() {
           <Route path='/' element={<Main />} />
           <Route path='/home' element={<Main />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/createprofile' element={<CreateProfile />} />
-
+          <Route path='/createprofile/:userId' element={<CreateProfile />} />
           <Route path='/display' element={<Display />} />
           <Route path='/gender' element={<Gender />} />
           <Route path='/biography' element={<Biography />} />
           <Route path='/profilephoto' element={<ProfilePhoto />} />
-          <Route path='/success' element={<Success />} />
-          <Route path='/quiz' element={<Quiz />} />
-          <Route path='/results' element={<Results />} />
+          <Route path='/success/:userId' element={<Success />} />
+          <Route path='/quiz/:userId' element={<Quiz />} />
+          <Route path='/results/:userId' element={<Results />} />
         </Routes>
       </div>
     </Router>

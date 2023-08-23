@@ -12,6 +12,21 @@ function ProfilePhoto({ formMethods }) {
       setUploadedImage(URL.createObjectURL(file));
     }
   };
+  // Helper function to read file as buffer
+  // const readFileAsBuffer = (file) => {
+  //   setUploadedImage(URL.createObjectURL(file));
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.onload = (event) => {
+  //       const buffer = event.target.result;
+  //       resolve(buffer);
+  //     };
+  //     reader.onerror = (error) => {
+  //       reject(error);
+  //     };
+  //     reader.readAsArrayBuffer(file);
+  //   });
+  // };
 
   return (
     <div className='container'>
@@ -49,6 +64,13 @@ function ProfilePhoto({ formMethods }) {
                         field.onChange(e);
                         handleImageChange(e);
                       }}
+                      // onChange={async (e) => {
+                      //   const file = e.target.files[0];
+                      //   if (file) {
+                      //     const buffer = await readFileAsBuffer(file);
+                      //     field.onChange(buffer);
+                      //   }
+                      // }}
                       placeholder='Upload Photo'
                     />
                     <span>{formMethods.isValid ? 'Upload' : 'Upload Photo'}</span>

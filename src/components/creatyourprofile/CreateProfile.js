@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Display from './Display';
 import Gender from './Gender';
@@ -12,12 +11,11 @@ import './CreateProfile.css';
 function CreateProfile() {
   const [page, setPage] = useState(0);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  
+  const navigate = useNavigate(); 
   const isLastPage = page === 3;
 //   const formMethods = useForm();
-
+  const { userId } = useParams();
+  
   const {
     control,
     trigger,
@@ -95,6 +93,8 @@ function CreateProfile() {
   }; 
 
   const onSubmit = async (formData) => {
+     // Add userID to the formData object
+    formData.userId = userId;
     console.log('Form Data:', formData);
     try {
       let token = localStorage.getItem('token');
@@ -116,7 +116,7 @@ function CreateProfile() {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        navigate('/success'); // Navigate on success
+        navigate(`/success/${result.newProfile.user}`); // Navigate on success
       } else {
         console.error('Server error:', response.status, response.statusText);
       }

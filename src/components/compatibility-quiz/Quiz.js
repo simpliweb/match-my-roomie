@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import Questions from './Questions';
 import './Quiz.css';
@@ -15,6 +15,7 @@ function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [selectedOption, setSelectedOption] = useState('');
+  const { userId } = useParams();
 
   // const handleOptionChange = (event) => {
   //   setSelectedOption(event.target.value);
@@ -62,13 +63,15 @@ function Quiz() {
 
 
   const onSubmit = async (formData) => {
+    formData.userId = userId;
     console.log('Form Data:', formData);
+    
     try {    
 
       let token = localStorage.getItem('token');
       token = JSON.parse(token)?.authToken;
 
-      const response = await fetch('http://localhost:8000/addpreference', {
+      const response = await fetch('https://mmr2.onrender.com/addpreference', {
         // http://localhost:8000/addpreference
         method: 'POST',
         // body: JSON.stringify({
@@ -85,7 +88,7 @@ function Quiz() {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        navigate("/result"); // Navigate on success
+        navigate('/result/:userId'); // Navigate on success
         } else {
           console.error('Server error:', response.status, response.statusText);
         } 

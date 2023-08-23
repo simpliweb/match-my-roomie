@@ -1,15 +1,18 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams  } from 'react-router-dom';
 import './Success.css';
 
 function Success() {
   const navigate = useNavigate();
+  const { userId } = useParams();
+
   const handleGoBack = () => {
     navigate(-1);
   };
 
   const onSubmit = () => {
-    navigate('/quiz');
+    console.log(userId)
+    navigate(`/quiz/${userId}`);
   };
 
   return (
