@@ -1,47 +1,118 @@
-const create_router = require("express").Router();
-const cors = require("cors");
-create_router.use(cors());
-const bodyParser = require("body-parser");
+const express = require("express");
+const router = express.Router();
 const Profile = require("../models/createprofile");
 const preference = require("../models/addpreference");
-create_router.use(bodyParser.json());
-create_router.use(cors());
 
-// Dashboard route to search for profiles based on user's preferred gender
-create_router.route("/dashboard").get((req, res) => {
-  const { genderPreference } = req.query;
+router.get("/dashboard/:userId", async (req, res) => {
+  console.log("USER", req.user);
+  const { userId } = req.params;
+  try {
+    const preferences = await preference.find({ user: userId });
+    let profiles = [
+      {
+        gender:
+          "Data not found Please Try Again Later Might Be Someone Visible For Your Preference",
+      },
+    ];
+    const { genderPreference, preferredAge } = preferences[0];
 
-  if (!genderPreference) {
-    // If no gender preference provided, return all profiles
-    Profile.find({})
-      .then((profiles) => {
-        if (profiles.length === 0) {
-          return res.json("No profiles found");
-        }
-        res.json(profiles);
-      })
-      .catch((err) => res.status(500).json("Error: " + err));
-  } else {
-    // If gender preference is provided, filter profiles based on the top preference
-    preference
-      .findOne({ genderPreference })
-      .then((preferenceData) => {
-        if (!preferenceData) {
-          return res.status(404).json("Preferences not found");
-        }
-        const { topPreference } = preferenceData;
+    if (genderPreference === "Female") {
+      if (preferredAge === "18-22") {
+        profiles = await Profile.find({
+          gender: "Female",
+          age: { $gte: 18, $lte: 22 },
+        });
+      } else if (preferredAge === "23-27") {
+        profiles = await Profile.find({
+          gender: "Female",
+          age: { $gte: 23, $lte: 27 }, // 23 27
+        });
+      } else if (preferredAge === "28-32") {
+        profiles = await Profile.find({
+          gender: "Female",
+          age: { $gte: 28, $lte: 32 },
+        });
+      } else if (preferredAge === "33-37") {
+        profiles = await Profile.find({
+          gender: "Female",
+          age: { $gte: 33, $lte: 37 },
+        });
+      }
+    } else if (genderPreference === "Male") {
+      if (preferredAge === "18-22") {
+        profiles = await Profile.find({
+          gender: "Male",
+          age: { $gte: 18, $lte: 22 },
+        });
+      } else if (preferredAge === "23-27") {
+        profiles = await Profile.find({
+          gender: "Male",
+          age: { $gte: 23, $lte: 27 },
+        });
+      } else if (preferredAge === "28-32") {
+        profiles = await Profile.find({
+          gender: "Male",
+          age: { $gte: 28, $lte: 32 },
+        });
+      } else if (preferredAge === "33-37") {
+        profiles = await Profile.find({
+          gender: "Male",
+          age: { $gte: 33, $lte: 37 },
+        });
+      }
+    } else if (genderPreference === "Transgender") {
+      if (preferredAge === "18-22") {
+        profiles = await Profile.find({
+          gender: "Transgender",
+          age: { $gte: 18, $lte: 22 },
+        });
+      } else if (preferredAge === "23-27") {
+        profiles = await Profile.find({
+          gender: "Transgender",
+          age: { $gte: 23, $lte: 27 },
+        });
+      } else if (preferredAge === "28-32") {
+        profiles = await Profile.find({
+          gender: "Transgender",
+          age: { $gte: 28, $lte: 32 },
+        });
+      } else if (preferredAge === "33-37") {
+        profiles = await Profile.find({
+          gender: "Transgender",
+          age: { $gte: 33, $lte: 37 },
+        });
+      }
+    } else if (genderPreference === "Non-Binary") {
+      if (preferredAge === "18-22") {
+        profiles = await Profile.find({
+          gender: "Non-Binary",
+          age: { $gte: 18, $lte: 22 },
+        });
+      } else if (preferredAge === "23-27") {
+        profiles = await Profile.find({
+          gender: "Non-Binary",
+          age: { $gte: 23, $lte: 27 },
+        });
+      } else if (preferredAge === "28-32") {
+        profiles = await Profile.find({
+          gender: "Non-Binary",
+          age: { $gte: 28, $lte: 32 },
+        });
+      } else if (preferredAge === "33-37") {
+        profiles = await Profile.find({
+          gender: "Non-Binary",
+          age: { $gte: 33, $lte: 37 },
+        });
+      }
+    }
 
-        Profile.find({ Gender: topPreference })
-          .then((profiles) => {
-            if (profiles.length === 0) {
-              return res.json("No matching profiles found");
-            }
-            res.json(profiles);
-          })
-          .catch((err) => res.status(500).json("Error: " + err));
-      })
-      .catch((err) => res.status(500).json("Error: " + err));
+    res.json({ profiles });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(403)
+      .json({ message: "Dashboard API Failed", err: error.message });
   }
 });
 
-module.exports = create_router;
+module.exports = router;
