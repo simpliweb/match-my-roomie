@@ -6,14 +6,17 @@ const bodyParser = require("body-parser");
 const preference = require("../models/addpreference");
 create_router.use(bodyParser.json());
 create_router.use(cors());
+// const { loggedIn } = require("../middleware/middleware");
 
 
-create_router.route("/addpreference").post((req, res) => {
+create_router.route("/addpreference").post( async  (req, res) => {
     // console.log(req.body);
-    const { genderPreference, accommodationType, preferredAge, topPreference } = req.body;
+    const { genderPreference, accommodationType, preferredAge, topPreference, userId } = req.body;
+    // const { id: userId } = req.user;
   
     // console.log(req.body);
     const newPreference = new preference({
+      user: userId,
       genderPreference,
         accommodationType,
         preferredAge,
@@ -22,7 +25,7 @@ create_router.route("/addpreference").post((req, res) => {
   
     newPreference
       .save()
-      .then(() => res.json("Profile Created"))
+      .then((createdProfile) => res.json({ message: "Profile Created", newPreference: createdProfile }))
       .catch((err) => res.status(400).json("Error: " + err));
   });
   
