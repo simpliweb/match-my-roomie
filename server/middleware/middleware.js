@@ -3,10 +3,12 @@ const jwt = require("jsonwebtoken");
 
 // Middleware for authorization of user to check if logged in
 const loggedIn = async (req, res, next) => {
+  let token = req.headers.authorization; 
+  console.log( "From Middleware: ",token);
   try {
     // auth header
-    if (req.headers.authorization) {
-      const token = req.headers.authorization.split("")[1];
+    if (token) {
+       token = req.headers.authorization.split(" ")[1];
       if (token) {
         const payload = await jwt.verify(token, process.env.SECRET_KEY);
         if (payload) {
@@ -26,6 +28,4 @@ const loggedIn = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  loggedIn,
-};
+module.exports = loggedIn;
