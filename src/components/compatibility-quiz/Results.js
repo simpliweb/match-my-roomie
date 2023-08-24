@@ -1,37 +1,96 @@
 import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+// import plus from '../../assets/images/icon/Plus.png';
+import logo from '../../assets/images/Logo.png';
+import './Results.css';
+
+
+
 
 function Results() {
   const [matchedUsers, setMatchedUsers] = useState([]);
+  const { userId } = useParams();
 
   useEffect(() => {
     // Fetch matched users data from API
-    axios.get('https://mmr2.onrender.com/dashboard/:userId')
+    axios.get(`https://mmr2.onrender.com/dashboard/${userId}`)
+      // .then(response => {
+
+      //   console.log(response)
+
+      //   const matchedUsersData = response.data.profiles;
+      //   setMatchedUsers(matchedUsersData);
+      //   console.log(matchedUsers)
+      // })
+      // .catch(error => {
+      //   console.error('Error fetching matched users:', error);
+      // });
       .then(response => {
+        console.log(response)
         const matchedUsersData = response.data.profiles;
-        setMatchedUsers(matchedUsersData);
+        setMatchedUsers(matchedUsersData.slice(0, 10)); // Limit to first 10 users
       })
       .catch(error => {
         console.error('Error fetching matched users:', error);
       });
   }, []);
 
+  // Convert an array buffer to a Base64 string
+  function arrayBufferToBase64(buffer) {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    const len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  }
+
   return (
-    <div>
-      <h2>Top 10 Best Matched Users</h2>
-      {matchedUsers.map(user => (
-        <div key={user._id}>
-          <h3>{user.firstName} {user.lastName}</h3>
-          <p>Gender: {user.Gender}</p>
-          <p>Age: {user.age}</p>
-          <p>About: {user.about}</p>
-          {user.photo && user.photo.type === 'Buffer' && (
-            <img src={`data:image/jpeg;base64,${Buffer.from(user.photo.data).toString('base64')}`} alt="User's Photo" />
-          )}
+    <div className='results-container'>
+      <div className='header'>
+        <div className='logo'>
+          <img src={logo} alt='logo' />
+          <h2>MatchMyRoomie</h2>
         </div>
-      ))}
+        <div className='nav'>
+          <Link to='/'>My Matches</Link>
+          <Link to='/'>Saved</Link>
+          <Link to='/'>Messages</Link>
+          <Link to='/'>My Profile</Link>
+        </div>
+      </div>
+      
+      <div className='inner-container'>
+        <div className='results'>
+          {matchedUsers.map(user => (        
+            <div className='each-user' key={user._id}>
+              <div className='user-profile'>
+                <div className='user-profile-image-container'>
+                  {user.photo && (
+                      <img src={`data:image/png;base64,${arrayBufferToBase64(user.photo.data)}`} alt="User's Photo" />
+                    )}
+                </div>
+                {/* {user.photo && user.photo.type === 'Buffer' && (
+                  <img src={`{data:image/jpeg;base64,${user.photo.data}`} alt="User's Photo" />
+                )} */}
+                {/* {user.photo && (
+                  <img src={`data:photo/jpeg;base64,${user.photo}`} alt="User's Photo" />
+                )} */}
+              </div>
+              <div className='user-profile-info'>
+                <h3 className='user-profile-title'>
+                  <span className='user-profile-name'>{user.firstName} {user.lastName} </span>
+                  <span className='user-profile-age-gender'>{user.age} {user.gender}</span>
+                </h3>
+                <p className='user-profile-about'>{user.about}</p>
+              </div>              
+            </div>
+          ))}
+        </div>
+        
+      </div>
     </div>
   );
 }

@@ -11,6 +11,7 @@ import './CreateProfile.css';
 function CreateProfile() {
   const [page, setPage] = useState(0);
   const [error, setError] = useState('');
+  const [imageBuffer, setImageBuffer] = useState(null);
   const navigate = useNavigate(); 
   const isLastPage = page === 3;
 //   const formMethods = useForm();
@@ -42,6 +43,11 @@ function CreateProfile() {
         navigate('/success');
       }
     }
+  };
+
+  const handleImageReady = (imageBuffer) => {
+    // Store the image buffer in the state
+    setImageBuffer(imageBuffer);
   };
 
   const PageDisplay = () => {
@@ -87,6 +93,7 @@ function CreateProfile() {
             handleSubmit,
             formState: { isValid, errors },
           }}
+          onImageReady={handleImageReady}
         />
       );
     }
@@ -95,6 +102,16 @@ function CreateProfile() {
   const onSubmit = async (formData) => {
      // Add userID to the formData object
     formData.userId = userId;
+
+    // Attach image buffer to formData
+    if (imageBuffer) {
+      formData.photo = {
+        type: 'Buffer', // Indicate that the data is a buffer
+        data: Array.from(new Uint8Array(imageBuffer)), // Convert buffer to an array of integers
+        contentType: 'image/jpeg', // Replace with the appropriate content type
+      };
+    }
+
     console.log('Form Data:', formData);
     try {
       let token = localStorage.getItem('token');

@@ -2,14 +2,33 @@ import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import './ProfilePhoto.css';
 
-function ProfilePhoto({ formMethods }) {
+function ProfilePhoto({ formMethods, onImageReady }) {
 
   const [uploadedImage, setUploadedImage] = useState(null);
 
-  const handleImageChange = (event) => {
+  // Utility function to read file as buffer
+  const readFileAsBuffer = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const buffer = event.target.result;
+        resolve(buffer);
+      };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+      reader.readAsArrayBuffer(file);
+    });
+  };
+
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
+      const buffer = await readFileAsBuffer(file);
+      onImageReady(buffer);
       setUploadedImage(URL.createObjectURL(file));
+      console.log("buffer",buffer);
+      console.log("file", file);
     }
   };
   // Helper function to read file as buffer

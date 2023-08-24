@@ -88,7 +88,7 @@ function Quiz() {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        navigate('/result/:userId'); // Navigate on success
+        navigate(`/results/${userId}`); // Navigate on success
         } else {
           console.error('Server error:', response.status, response.statusText);
         } 
