@@ -4,11 +4,13 @@ const cors = require("cors");
 const env = require("dotenv");
 const moongose = require("mongoose");
 const bodyParser = require("body-parser");
+// const authValidation = require("./middleware/middleware");
 
 // requiring Routes
 const userRoutes = require("./routes/user");
 const createRoutes = require("./routes/createprofile");
 const preferenceRoutes = require("./routes/addpreference");
+const dashboardRoutes = require("./routes/dashboard");
 
 // env config
 env.config();
@@ -26,12 +28,13 @@ moongose
 // middleware
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 //routes
 app.use("/user", userRoutes);
-app.use("", createRoutes);
-app.use("", preferenceRoutes);
+app.use("/", createRoutes);
+app.use("/", preferenceRoutes);
+app.use("/", dashboardRoutes);
 
 // listening to server
 const port = process.env.PORT || 8000;
