@@ -1,17 +1,13 @@
 const mongoose = require("mongoose");
-
 const userSchema = new mongoose.Schema({
+  // _id: mongoose.Schema.Types.ObjectId,
   firstName: {
     type: String,
     required: true,
-    min: 3,
-    max: 255,
   },
   lastName: {
     type: String,
-    required: true,
-    min: 3,
-    max: 255,
+    require: true,
   },
   email: {
     type: String,
@@ -27,4 +23,4 @@ const userSchema = new mongoose.Schema({
   },
 });   
 const User = mongoose.model("Entering Information", userSchema);
-module.exports = { User };
+module.exports =  {User} ;
