@@ -3,9 +3,10 @@ const user_router = require("express").Router();
 const { User, validate } = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+// const { loggedIn } = require("../middleware/middleware");
 
 // KEY
-const { KEY = "Secret" } = process.env.SECRET_KEY;
+const KEY = process.env.SECRET_KEY;
 
 user_router.get("/", (req, res) => {
   res.send("hie");
@@ -25,9 +26,14 @@ user_router.post("/signup", async (req, res) => {
       ...req.body,
       password: hashedpassword,
     });
-    res.status(200).send({ message: "User created successfully" });
+    res.status(200).send({
+      message: "User created successfully",
+      data: {
+        userId: newUser._id,
+      },
+    });
   } catch (error) {
-    //console.log(error);
+    console.log(error);
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
@@ -40,7 +46,7 @@ user_router.post("/login", async (req, res) => {
       const result = await bcrypt.compare(req.body.password, user.password);
       // console.log(result);
       if (result) {
-        const authToken = jwt.sign({ email: user.email }, KEY);
+        const authToken = jwt.sign({ email: user.email, id: user._id }, KEY);
         res.json({ authToken });
       } else {
         res.status(400).json({ message: "password doesn't match" });
