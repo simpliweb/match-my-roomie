@@ -5,8 +5,6 @@ import './Biography.css';
 function Biography({ formMethods }) {
   const [inputValue, setInputValue] = useState('');
 
-  //const inputValue = "This variable is intentionally unused";
-
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };

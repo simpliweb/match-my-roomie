@@ -22,10 +22,6 @@ function SignUp() {
   const [signUpCompleted, setSignUpCompleted] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-  //const error = "This variable is intentionally unused";
-  //const isFormValid = "This variable is intentionally unused";
-  //const signUpCompleted = "This variable is intentionally unused";
-
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -42,7 +38,6 @@ function SignUp() {
     try {
       const url = 'https://mmr2.onrender.com/user/signup';
       const { data: res } = await axios.post(url, formData);
-      // console.log(res.message);
       console.log(res)
       
       // Clear the form after successful submission
@@ -66,16 +61,7 @@ function SignUp() {
   };
 
   return (
-    <div className='sign-up-container'>
-      {/* Display error message if there is an error */}
-      {/* {error && <p className='error-message'>{error}</p>} */}
-
-      {/* Display sign-up completed message if sign-up is successful */}
-      {/* {signUpCompleted && (
-        <p className='success-message'>
-          Sign-up successful! You can now sign in.
-        </p>
-      )} */}
+    <div className='sign-up-container'>   
       <div className='account-create'>
         <h2 className='account-create-h2'>Create an Account</h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>

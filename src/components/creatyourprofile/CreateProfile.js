@@ -14,8 +14,6 @@ function CreateProfile() {
   const isLastPage = page === 3;
   const { userId } = useParams();
 
-  
-
   const {
     control,
     trigger,

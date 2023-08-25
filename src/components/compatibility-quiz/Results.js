@@ -4,9 +4,6 @@ import axios from 'axios';
 import logo from '../../assets/images/Logo.png';
 import './Results.css';
 
-
-
-
 function Results() {
   const [matchedUsers, setMatchedUsers] = useState([]);
   const { userId } = useParams();
@@ -57,7 +54,7 @@ function Results() {
               <div className='user-profile'>
                 <div className='user-profile-image-container'>
                   {user.photo && (
-                      <img src={`data:image/png;base64,${arrayBufferToBase64(user.photo.data)}`} alt="User's Photo" />
+                      <img src={`data:image/png;base64,${arrayBufferToBase64(user.photo.data)}`} alt="User's profile shot" />
                     )}
                 </div>
                 {/* {user.photo && user.photo.type === 'Buffer' && (
