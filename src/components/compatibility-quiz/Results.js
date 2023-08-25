@@ -19,7 +19,7 @@ function Results() {
       .catch(error => {
         console.error('Error fetching matched users:', error);
       });
-  }, []);
+  }, [userId]);
 
   // Convert an array buffer to a Base64 string
   function arrayBufferToBase64(buffer) {
