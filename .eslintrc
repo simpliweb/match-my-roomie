@@ -1,2 +1,5 @@
-[build]
-ignore_warnings = true
+{
+  "rules": {
+    "no-unused-vars": "off"
+  }
+}
