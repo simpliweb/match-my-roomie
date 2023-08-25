@@ -1,8 +1,14 @@
+.display-container {
+    width: 100%;
+    display: flex;
+}
+
 .profile-create-info {
-    padding: 13% 9% 0;
+    padding: 13% 9% 10%;
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
+    height: auto;
 }
 
 .create-progress-bar {
@@ -93,20 +99,4 @@
 
 .age-info {
     font-size: 0.7rem;
-}
-
-.profile-continue-button {
-    float: left;
-    margin-top: 45px;
-    border-radius: 8px;
-    color: #ffff;
-    font-family: medium;
-    padding: 8px 30px 10px;
-    background-color: #677684;
-    border: inherit;
-    font-size: 1.2rem;
-}
-
-.profile-continue-button.completed {
-    background-color: #4488C5;
 }

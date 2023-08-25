@@ -5,7 +5,7 @@ import './Display.css';
 
 function Display({ formMethods }) {  
   return (
-    <div className='container'>    
+    <div className='display-container'>    
       {/* <div className='inner-container'> */}
         <div className='profile-create-info'>   
           <div className='create-progress-bar'>
@@ -89,13 +89,41 @@ function Display({ formMethods }) {
                       <div className='age-label'>
                         <select id='age' {...field}>
                           <option value='' disabled></option>
-                          <option value='18-22'>18-22</option>
-                          <option value='23-27'>23-27</option>
-                          <option value='28-32'>28-32</option>
-                          <option value='33-37'>33-37</option>
-                          <option value='38-42'>38-42</option>
-                          <option value='43-47'>43-47</option>
-                          <option value='48-52'>48-52</option>
+                          <option value='18'>18</option>
+                          <option value='19'>19</option>
+                          <option value='20'>20</option>
+                          <option value='21'>21</option>
+                          <option value='22'>22</option>
+                          <option value='23'>23</option>
+                          <option value='24'>24</option>
+                          <option value='25'>25</option>
+                          <option value='26'>26</option>
+                          <option value='27'>27</option>
+                          <option value='28'>28</option>
+                          <option value='29'>29</option>
+                          <option value='30'>30</option>
+                          <option value='31'>31</option>
+                          <option value='32'>32</option>
+                          <option value='33'>33</option>
+                          <option value='34'>34</option>
+                          <option value='35'>35</option>
+                          <option value='36'>36</option>\
+                          <option value='37'>37</option>
+                          <option value='38'>38</option>
+                          <option value='39'>39</option>
+                          <option value='40'>40</option>
+                          <option value='41'>41</option>
+                          <option value='42'>42</option>
+                          <option value='43'>43</option>
+                          <option value='44'>44</option>
+                          <option value='45'>45</option>
+                          <option value='46'>46</option>
+                          <option value='47'>47</option>
+                          <option value='48'>48</option>
+                          <option value='49'>49</option>
+                          <option value='50'>50</option>
+                          <option value='51'>51</option>
+                          <option value='52'>52</option>
                           <option value='53+'>53+</option>
                         </select>
                         {formMethods.formState.errors.age && (

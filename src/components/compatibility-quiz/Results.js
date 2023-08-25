@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-// import plus from '../../assets/images/icon/Plus.png';
 import logo from '../../assets/images/Logo.png';
 import './Results.css';
 
@@ -14,18 +13,7 @@ function Results() {
 
   useEffect(() => {
     // Fetch matched users data from API
-    axios.get(`https://mmr2.onrender.com/dashboard/${userId}`)
-      // .then(response => {
-
-      //   console.log(response)
-
-      //   const matchedUsersData = response.data.profiles;
-      //   setMatchedUsers(matchedUsersData);
-      //   console.log(matchedUsers)
-      // })
-      // .catch(error => {
-      //   console.error('Error fetching matched users:', error);
-      // });
+    axios.get(`https://mmr2.onrender.com/dashboard/${userId}`)  
       .then(response => {
         console.log(response)
         const matchedUsersData = response.data.profiles;
@@ -62,7 +50,7 @@ function Results() {
         </div>
       </div>
       
-      <div className='inner-container'>
+      <div className='results-inner-container'>
         <div className='results'>
           {matchedUsers.map(user => (        
             <div className='each-user' key={user._id}>

@@ -8,6 +8,8 @@ function Gender({ formMethods }) {
   const [selectedOption, setSelectedOption] = useState('');
   const [isCustomOption, setCustomOption] = useState('');
 
+  //const isCustomOption = "This variable is intentionally unused";
+
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };

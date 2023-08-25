@@ -22,6 +22,11 @@ function SignUp() {
   const [signUpCompleted, setSignUpCompleted] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
+  //const error = "This variable is intentionally unused";
+  //const isFormValid = "This variable is intentionally unused";
+  //const signUpCompleted = "This variable is intentionally unused";
+
+
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };

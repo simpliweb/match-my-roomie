@@ -5,7 +5,7 @@
     flex-direction: column;    
 }
 
-.inner-container {
+.results-inner-container {
     display: inline-flex;
     padding: 2% 5%;
     background-color: #f0f6fa;

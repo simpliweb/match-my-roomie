@@ -17,27 +17,22 @@ function Quiz() {
   const [selectedOption, setSelectedOption] = useState('');
   const { userId } = useParams();
 
-  // const handleOptionChange = (event) => {
-  //   setSelectedOption(event.target.value);
-  //   setIsContinueDisabled(false);
-  // };
 
-    const [formData, setFormData] = useState({
-      genderPreference: '',
-      accommodationType: '',
-      preferredAge: '',
-      topPreference: '',
-    });
+  const [formData, setFormData] = useState({
+    genderPreference: '',
+    accommodationType: '',
+    preferredAge: '',
+    topPreference: '',
+  });
 
-    // ...
 
-    const handleOptionChange = (fieldName, option) => {
-      setFormData((prevData) => ({
-        ...prevData,
-        [fieldName]: option,
-      }));
-      setIsContinueDisabled(false);
-    };
+  const handleOptionChange = (fieldName, option) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: option,
+    }));
+    setIsContinueDisabled(false);
+  };
 
   const handleNextQuestion = () => {
     console.log('handleNextQuestion is working ' + currentQuestionIndex);
@@ -105,12 +100,20 @@ function Quiz() {
   };
 
   return (
-    <div className='container'>
-      <div className='inner-container'>
-        <button className='back-button' onClick={handlePreviousQuestion}>
-          <i className='fas fa-arrow-left'></i>
-          Back
-        </button>
+    <div className='quiz-container'>
+       {/* <div className='back-button-container'> */}
+         <button className='quiz-back-button' onClick={handlePreviousQuestion}>
+             <i className='fas fa-arrow-left'></i>
+             Back
+         </button>
+      {/* </div>  */}
+      <div className='inner-container'>  
+        {/* <button className='quiz-back-button' onClick={handlePreviousQuestion}>
+            <i className='fas fa-arrow-left'></i>
+            Back
+        </button>      */}
+   
+
         <div className='quiz-questions'>
           <div className='progress-indicator-container'>
             {Questions.map((_, index) => (
@@ -130,7 +133,7 @@ function Quiz() {
             </h3>
             <p className='inner-p'>
               This information helps us find a roommate that will be a
-              <span>good match for you.</span>
+              <span>good fit for you.</span>
             </p>
             <form className='quiz-form' onSubmit={handleSubmit(onSubmit)}>
               {Questions[currentQuestionIndex].options.map((option, index) => (
@@ -157,14 +160,14 @@ function Quiz() {
                       />
                     )}
                   />
-                  {optionIcons[option] && (
-                    <img
-                      className='icon'
-                      src={optionIcons[option]}
-                      alt={option}
-                    />
-                  )}
-                  <span className='option-text'>{option}</span>
+                  {/* {optionIcons[option] && (
+                     <img
+                     className='quiz-icon'
+                     src={optionIcons[option]}
+                     alt={option}
+                   />                  
+                  )}                */}
+                    <span className='option-text'>{option}</span> 
                 </label>
               ))}
               {currentQuestionIndex < Questions.length - 1 ? (
