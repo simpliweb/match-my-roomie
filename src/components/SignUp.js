@@ -22,7 +22,6 @@ function SignUp() {
   const [signUpCompleted, setSignUpCompleted] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
