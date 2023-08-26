@@ -1,50 +1,60 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import '../assets/styles/Signup.css';
+import '../assets/styles/SignUp.css';
 
 
-function Signup() {
-	const [error, setError] = useState('');
-  // const [data, setData] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   email: '',
-  //   password: '',
-  // });
+function SignUp() {  
+  const {
+    control,
+    handleSubmit,
+    reset,
+    trigger,
+    formState: { errors, isValid },
+  } = useForm();
+
+  const navigate = useNavigate();
+
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [signUpCompleted, setSignUpCompleted] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   const handleFormValidation = async () => {
-    const isValid = await trigger(); // Manually trigger form validation
-    setIsFormValid(isValid);  
+    const isValidForm  = await trigger(); // Manually trigger form validation
+    setIsFormValid(isValidForm);
+    setIsFormSubmitted(true);;
   };
 
-  // const handleChange = ({ currentTarget: input }) => {
-  //   setData({ ...data, [input.name]: input.value });
-  // };
-
-  const {
-    control,
-    handleSubmit,
-    reset,
-    trigger,
-    formState: { errors },
-  } = useForm();
-
   const onSubmit = async (formData) => {
-    // console.log(data)
+    setIsSubmitting(true); // Start loading state
+    setIsNavigating(true); // Start navigation state
+    console.log(formData)
     try {
-      const url = 'http://localhost:8000/user/signup';
+      const url = 'https://mmr2.onrender.com/user/signup';
       const { data: res } = await axios.post(url, formData);
-      console.log(res.message);
+      console.log(res)      
+      
 
       // Clear the form after successful submission
-      reset(); // Call the reset function
+      reset();
+
+      // Set sign-up completed to true
+      setSignUpCompleted(true);
+
+      
+      // Navigate to another page
+      navigate(`/createprofile/${res.data.userId}`);
+
+      setIsSubmitting(false); // End loading state
     } catch (error) {
       if (
         error.response &&
@@ -55,19 +65,17 @@ function Signup() {
       }
     }
     setIsFormValid(true);
+    setIsSubmitting(false); // End loading state
+    setIsNavigating(false); // End navigation state
   };
 
   return (
-    <div className='sign-up'>
-      <div className='account-create'>
-        <h2>Create an Account</h2>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-          className='container'
-        >
+    <div className='sign-up-container'>         
+      <div className={`account-create ${isNavigating ? 'blur-overlay' : ''}`}>
+        <h2 className='account-create-h2'>Create an Account</h2>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
           {/* email */}
-          <label className='email'>
+          <label className='account-create-label'>
             Email
             <Controller
               name='email'
@@ -82,11 +90,10 @@ function Signup() {
               }}
               render={({ field }) => (
                 <input
+                  className='account-create-input'
                   {...field}
                   type='email'
                   placeholder='email@matchmyroomie.com'
-                  // value={data.email}
-                  // onChange={handleChange}
                 />
               )}
             />
@@ -96,8 +103,8 @@ function Signup() {
           </label>
 
           {/* first name */}
-          <div className='label-name'>
-            <label>
+          <div className='account-create-label-name'>
+            <label className='account-create-label'>
               First Name
               <Controller
                 name='firstName'
@@ -106,11 +113,10 @@ function Signup() {
                 rules={{ required: 'First Name is required.' }}
                 render={({ field }) => (
                   <input
+                    className='account-create-label-name-input'
                     {...field}
                     type='text'
                     placeholder='Jane'
-                    // value={data.firstName}
-                    // onChange={handleChange}
                   />
                 )}
               />
@@ -120,7 +126,7 @@ function Signup() {
             </label>
 
             {/* last name */}
-            <label>
+            <label className='account-create-label'>
               Last Name
               <Controller
                 name='lastName'
@@ -129,11 +135,10 @@ function Signup() {
                 rules={{ required: 'Last Name is required.' }}
                 render={({ field }) => (
                   <input
+                    className='account-create-label-name-input'
                     {...field}
                     type='text'
                     placeholder='Doe'
-                    // value={data.lastName}
-                    // onChange={handleChange}
                   />
                 )}
               />
@@ -144,7 +149,7 @@ function Signup() {
           </div>
 
           {/* password */}
-          <label>
+          <label className='account-create-label'>
             Password
             <Controller
               name='password'
@@ -156,21 +161,18 @@ function Signup() {
                   value: 8,
                   message: 'Password must be at least 8 characters long.',
                 },
-                pattern: {
-                  value: /^(?=.*[!@#$%^&*])/,
-                  message: 'Password must contain at least one symbol.',
-                },
+                // pattern: {
+                //   value: /^(?=.*[!@#$%^&*])/,
+                //   message: 'Password must contain at least one symbol.',
+                // },
               }}
               render={({ field }) => (
                 <div className='password-input'>
                   <input
+                    className='account-create-input'
                     {...field}
                     type={showPassword ? 'text' : 'password'}
-                    // value={password}
-                    // onChange={handlePasswordChange}
-                    placeholder='*********'
-                    // value={data.password}
-                    // onChange={handleChange}
+                    placeholder='*********'                     
                   />
                   <i
                     className={showPassword ? 'far fa-eye' : 'far fa-eye-slash'}
@@ -185,33 +187,30 @@ function Signup() {
                 {errors.password.message}
               </p>
             )}
-            {/* {errors.password && (
-              <ul className='password-error-message'>
-                Your password must contain:
-                <li>a symbol</li>
-                <li>a minimum of 8 characters</li>
-              </ul>
-            )} */}
           </label>
-          <div className={`signup-button ${isFormValid ? 'blue-button' : ''}`}>
-            <button type='submit' onClick={handleFormValidation}>Sign Up</button>
+          <div
+            className={`signup-button ${isValid ? 'valid' : 'invalid'}`}
+          >
+            <button type='submit' onClick={handleFormValidation} disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Sign Up'}
+            </button>
           </div>
         </form>
-
         <div className='account-check'>
           Already have an account? <button>Sign in</button>
         </div>
       </div>
 
       <div className='account-side'>
-        <img src={require('../assets/images/Ellipse 11.png')} alt='roommates' />
+        <img src={require('../assets/images/ellipse11.png')} alt='roommates' />
         <p>
           "Thanks to MatchMyRoomie, I<span>found my new best friend!"</span>
           <span>- Tanya, 29</span>
         </p>
       </div>
+      <div id="loader"  className={isNavigating ? 'show-load' : ''}></div>
     </div>
   );
 }
 
-export default Signup;
+export default SignUp;

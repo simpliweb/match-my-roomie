@@ -26,7 +26,7 @@ function Main() {
               alt='roommates'
             />
           </div>
-        </div>
+         </div>
       </div>
     </>
   );

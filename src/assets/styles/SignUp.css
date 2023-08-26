@@ -1,6 +1,51 @@
-.sign-up {
+#loader {
+    position: absolute;
+    margin: 25% 40%;
+    width: 120px;
+    height: 120px;
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    animation: spin 2s linear infinite, heart-beat 2s linear infinite;
+    background-color: #fff;
+    text-align: center;
+    line-height: 120px;
+    display: none; 
+  }
+  
+#loader.show-load {
+    display: block;
+  }
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes heart-beat {
+    55% { background-color: #fff; }
+    60% { background-color: #3498db; }
+    65% { background-color: #fff; }
+    70% { background-color: #3498db; }
+    100% { background-color: #fff; }
+}
+  
+.account-create.blur-overlay::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity as needed */
+    backdrop-filter: blur(5px); /* Adjust the blur amount as needed */
+    /*z-index: 1000;*/ /* Make sure the overlay is above other content*/
+  }
+
+
+.sign-up-container {
+    position: relative;
+    width: 100%;
     display: flex;
 }
 
@@ -9,13 +54,13 @@
     padding: 15% 10%;
 }
 
-.account-create h2 {
+.account-create-h2 {
     font-size: 2rem;
     font-family: medium;
     text-align: left;
 }
 
-label {
+.account-create-label {
     display: flex;
     flex-direction: column;
     width: 85%;
@@ -32,24 +77,34 @@ label {
     margin: 0;
 }
 
-.label-name {
+.account-create-label-name {
     display: flex;
 }
 
-.label-name input {
+.account-create-label-name-input {
     width: 80%;
-}
-
-input {
     margin-top: 5px;
     border-radius: 5px;
     padding: 13px;
     border: 1px solid rgba(0, 0, 0);
-    width: 75%;
+}
+
+.account-create-input {
+    margin-top: 5px;
+    border-radius: 5px;
+    padding: 13px;
+    border: 1px solid rgba(0, 0, 0);
+    width: 75%;    
 }
 
 .password-input {
     position: relative;
+    
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
 }
 
 .password-input i {
@@ -73,16 +128,16 @@ input {
     text-align: left;
 }
 
-.signup-button.blue-button button {
+.signup-button.valid button {
   background-color: #4488c5;
   border: inherit;
   color: white;
   cursor: pointer;
 }
 
-.signup-button.blue-button button:focus {
+/* .signup-button.blue-button button:focus {
   border: 1px solid #000000; 
-}
+} */
 
 .signup-button button {    
     font-family: medium;
@@ -97,7 +152,7 @@ input {
 
 .account-check {
     margin-top: 30px;
-    font-family: regular;
+    font-family: Regular;
 }
 
 .account-check button {
@@ -111,11 +166,11 @@ input {
 .account-side {
     background-color: #c7dbee;
     width: 40%;
-    height: 45vh;
+    height: 100%;
     padding: 20% 5% 25%;
 }
 
-.account-side img {
+.account-side img{
     width: 58%;   
 }
 
