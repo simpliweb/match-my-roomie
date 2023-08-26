@@ -21,6 +21,8 @@ function SignUp() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [signUpCompleted, setSignUpCompleted] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -33,20 +35,26 @@ function SignUp() {
   };
 
   const onSubmit = async (formData) => {
+    setIsSubmitting(true); // Start loading state
+    setIsNavigating(true); // Start navigation state
     console.log(formData)
     try {
       const url = 'https://mmr2.onrender.com/user/signup';
       const { data: res } = await axios.post(url, formData);
-      console.log(res)
+      console.log(res)      
       
+
       // Clear the form after successful submission
       reset();
 
       // Set sign-up completed to true
       setSignUpCompleted(true);
 
+      
       // Navigate to another page
       navigate(`/createprofile/${res.data.userId}`);
+
+      setIsSubmitting(false); // End loading state
     } catch (error) {
       if (
         error.response &&
@@ -57,11 +65,13 @@ function SignUp() {
       }
     }
     setIsFormValid(true);
+    setIsSubmitting(false); // End loading state
+    setIsNavigating(false); // End navigation state
   };
 
   return (
-    <div className='sign-up-container'>   
-      <div className='account-create'>
+    <div className='sign-up-container'>         
+      <div className={`account-create ${isNavigating ? 'blur-overlay' : ''}`}>
         <h2 className='account-create-h2'>Create an Account</h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           {/* email */}
@@ -162,7 +172,7 @@ function SignUp() {
                     className='account-create-input'
                     {...field}
                     type={showPassword ? 'text' : 'password'}
-                    placeholder='*********'
+                    placeholder='*********'                     
                   />
                   <i
                     className={showPassword ? 'far fa-eye' : 'far fa-eye-slash'}
@@ -179,12 +189,10 @@ function SignUp() {
             )}
           </label>
           <div
-            className={`signup-button ${
-              isFormSubmitted && isValid ? 'filled-button' : ''
-            }`}
+            className={`signup-button ${isValid ? 'valid' : 'invalid'}`}
           >
-            <button type='submit' onClick={handleFormValidation}>
-              Sign Up
+            <button type='submit' onClick={handleFormValidation} disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Sign Up'}
             </button>
           </div>
         </form>
@@ -200,6 +208,7 @@ function SignUp() {
           <span>- Tanya, 29</span>
         </p>
       </div>
+      <div id="loader"  className={isNavigating ? 'show-load' : ''}></div>
     </div>
   );
 }

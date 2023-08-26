@@ -16,13 +16,8 @@ function Success() {
   };
 
   return (
-    <div className='success-container'>
-      <div className='success-inner-container'>
-        <button className='back-button' onClick={handleGoBack}>
-          <i className='fas fa-arrow-left'></i>
-          Back
-        </button>
-
+    <div className='success-container'>   
+      <div className='success-inner-container'>       
         <h2 className='success-h2'>Success!</h2>
         <h3 className='success-h3'>
           Next, take our proven

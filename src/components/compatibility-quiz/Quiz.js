@@ -93,11 +93,11 @@ function Quiz() {
     };
 
   //Create a mapping of options to icon images
-  const optionIcons = {
-    'House': houseIcon,
-    'Apartment': apartmentIcon,
-    'A bed in a Shared Bedroom': bedIcon
-  };
+  // const optionIcons = {
+  //   'House': houseIcon,
+  //   'Apartment': apartmentIcon,
+  //   'A bed in a Shared Bedroom': bedIcon
+  // };
 
   return (
     <div className='quiz-container'>

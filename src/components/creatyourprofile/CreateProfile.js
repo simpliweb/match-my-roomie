@@ -13,12 +13,14 @@ function CreateProfile() {
   const navigate = useNavigate(); 
   const isLastPage = page === 3;
   const { userId } = useParams();
+  const [formData, setFormData] = useState({})
 
   const {
     control,
     trigger,
     handleSubmit,
     formState: { errors, isValid },
+    getValues,
   } = useForm();
 
 
@@ -29,17 +31,33 @@ function CreateProfile() {
   };
 
   const handleContinue = async () => {
-    console.log('next-button');
+    console.log('handle continue');
+    console.log('page', page);
+
     const isValid = await trigger();
-    console.log(isValid);
+    console.log('is Valid', isValid)
     if (page < 3 && isValid) {
       setPage(page + 1);
+      setFormData(getValues())
+      formData.userId = userId;
+      console.log(formData);
     } else if (isValid) {
       if (page === 3) {
-        handleSubmit(onSubmit)();
+        handleFormSubmit(formData)
       } else {
         navigate('/success');
       }
+    }
+
+  };
+ 
+  const handleSkip = async () => {
+    console.log("skip")
+    if (page === 2) {
+      // Skip the Biography page
+      setPage(page + 1); // Skip to the ProfilePhoto page
+    } else if (page === 3) {
+     handleFormSubmit(formData)
     }
   };
 
@@ -58,7 +76,7 @@ function CreateProfile() {
             handleSubmit,
             formState: { isValid, errors },
           }}
-        />
+        /> 
       );
     } else if (page === 1) {
       return (
@@ -76,7 +94,7 @@ function CreateProfile() {
         <Biography
           formMethods={{
             control,
-            trigger,
+            // trigger,
             handleSubmit,
             formState: { isValid, errors },
           }}
@@ -87,7 +105,7 @@ function CreateProfile() {
         <ProfilePhoto
           formMethods={{
             control,
-            trigger,
+            // trigger,
             handleSubmit,
             formState: { isValid, errors },
           }}
@@ -97,86 +115,70 @@ function CreateProfile() {
     }
   }; 
 
-  const onSubmit = async (formData) => {
-    // Add userID to the formData object
-   formData.userId = userId;
+  const handleFormSubmit= async (form) => {
+    // Add userID to the form object
+    form.userId = userId;
 
-   // Attach image buffer to formData
+   // Attach image buffer to form
    if (imageBuffer) {
-     formData.photo = {
+    form.photo = {
        type: 'Buffer', // Indicate that the data is a buffer
        data: Array.from(new Uint8Array(imageBuffer)), // Convert buffer to an array of integers
        contentType: 'image/jpeg', // Replace with the appropriate content type
      };
    }
 
-   console.log('Form Data:', formData);
-   try {
-     let token = localStorage.getItem('token');
-     token = JSON.parse(token)?.authToken;
+   if (page === 3){
+    try {
+        let token = localStorage.getItem('token');
+        token = JSON.parse(token)?.authToken;
 
-     const response = await fetch('https://mmr2.onrender.com/createprofile', {
-       method: 'POST',   
-       body: JSON.stringify(formData),
-       headers: {
-         'Content-Type': 'application/json',
-         Authorization: `Bearer ${token}`,
-       },
-     });
+        const response = await fetch('https://mmr2.onrender.com/createprofile', {
+        method: 'POST',   
+        body: JSON.stringify(form),
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        });
 
-     if (response.ok) {
-       const result = await response.json();
-       console.log(result);
-       navigate(`/success/${result.newProfile.user}`); // Navigate on success
-      } else {
-        console.error('Server error:', response.status, response.statusText);
-      }
-    } catch (error) {
-      console.error('API Error:', error);
+        if (response.ok) {
+        const result = await response.json();
+        navigate(`/success/${result.newProfile.user}`); // Navigate on success
+        } else {
+            console.error('Server error:', response.status, response.statusText);
+        }
+        } catch (error) {
+        console.error('API Error:', error);
+        }
     }
-  };
- 
-  const handleSkip = async () => {
-    if (page === 2) {
-      // Skip the Biography page
-      setPage(page + 1); // Skip to the ProfilePhoto page
-    } else if (page === 3) {
-      // Check if an image is uploaded before skipping
-      if (imageBuffer) {
-        // Submit the form with image on the ProfilePhoto page
-        await handleSubmit(onSubmit)();
-      } else {
-        // User clicked 'Not Now' without uploading image
-        await onSubmit({}); // Call onSubmit with an empty object
-      }
-    }
-  };
+}
 
 
   return (
     <form className='create-profile-forms-container'>
-      {/* <div className='progress-indicator-container'></div> */}
-      {page !== 0 && (
+        {page !== 0 && (
         <button className='back-button' onClick={handleGoBack}>
-          <i className='fas fa-arrow-left'></i>
-          Back
+            <i className='fas fa-arrow-left'></i>
+            Back
         </button>
-      )}
-      <div className='all-forms'>{PageDisplay()}</div>
-      <div className='button-group'>
-        <button
-          type='button'
-          className={`continue-button ${isLastPage ? 'submit-button' : ''} ${isValid ? 'valid' : 'invalid'}`}
-          onClick={handleContinue}
-        >
-          {isLastPage ? 'Submit' : 'Continue'}
-        </button>
-        {page === 2 || page === 3 ? (
-          <button type='button' className='skip-button' onClick={handleSkip}>
-            Not Now
-          </button>
-        ) : null}
-      </div>
+        )}
+        <div className='all-forms'>{PageDisplay()}</div>
+    
+        <div className='button-group'>
+            <button
+            type='button'
+            className={`continue-button ${isLastPage ? 'submit-button' : ''} ${isValid ? 'valid' : 'invalid'}`}
+            onClick={handleSubmit(handleContinue)}
+            >
+            {isLastPage ? 'Submit' : 'Continue'}
+            </button>
+            {page === 2 || page === 3 ? (
+            <button type='button' className='skip-button' onClick={handleSkip}>
+                Not Now
+            </button>
+            ) : null}
+        </div>
     </form>
   );
 }
