@@ -6,15 +6,15 @@ import Questions from './Questions';
 import './Quiz.css';
 
 // Import the icon images
-import houseIcon from '../../assets/images/icon/House.png';
-import apartmentIcon from '../../assets/images/icon/Apartment.png';
-import bedIcon from '../../assets/images/icon/Single Bed.png';
+// import houseIcon from '../../assets/images/icon/House.png';
+// import apartmentIcon from '../../assets/images/icon/Apartment.png';
+// import bedIcon from '../../assets/images/icon/Single Bed.png';
 
 function Quiz() {
   const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
-  const [selectedOption, setSelectedOption] = useState('');
+  // const [selectedOption, setSelectedOption] = useState('');
   const { userId } = useParams();
 
 
@@ -102,10 +102,12 @@ function Quiz() {
   return (
     <div className='quiz-container'>
        {/* <div className='back-button-container'> */}
+        {currentQuestionIndex > 0 && (
          <button className='quiz-back-button' onClick={handlePreviousQuestion}>
              <i className='fas fa-arrow-left'></i>
              Back
          </button>
+        )}
       {/* </div>  */}
       <div className='inner-container'>  
         {/* <button className='quiz-back-button' onClick={handlePreviousQuestion}>

@@ -6,8 +6,11 @@ function Navbar() {
   return (
     <div className='header'>
       <div className='logo'>
-        <img src={logo} alt='logo' />
-        <h2>MatchMyRoomie</h2>
+        <Link to='/'>
+          <img src={logo} alt='logo' />
+          {/* <h2>MatchMyRoomie</h2> */}
+        </Link>
+        <h2 className='logo-h2'>MatchMyRoomie</h2>   
       </div>
       <div className='nav'>
         <Link to='/'>Home</Link>

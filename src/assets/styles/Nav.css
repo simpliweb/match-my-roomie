@@ -20,6 +20,10 @@
     font-family: regular;
 }
 
+.logo-h2 a{
+    text-decoration: none;
+}
+
 .nav {
     display: flex;
     justify-content: space-evenly;

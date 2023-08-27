@@ -36,7 +36,9 @@ function Results() {
     <div className='results-container'>
       <div className='header'>
         <div className='logo'>
-          <img src={logo} alt='logo' />
+          <Link to='/'>
+            <img src={logo} alt='logo' />
+          </Link>
           <h2>MatchMyRoomie</h2>
         </div>
         <div className='nav'>
@@ -46,16 +48,21 @@ function Results() {
           <Link to='/'>My Profile</Link>
         </div>
       </div>
-      
+
       <div className='results-inner-container'>
         <div className='results'>
-          {matchedUsers.map(user => (        
+          {matchedUsers.map((user) => (
             <div className='each-user' key={user._id}>
               <div className='user-profile'>
                 <div className='user-profile-image-container'>
                   {user.photo && (
-                      <img src={`data:image/png;base64,${arrayBufferToBase64(user.photo.data)}`} alt="User's profile shot" />
-                    )}
+                    <img
+                      src={`data:image/png;base64,${arrayBufferToBase64(
+                        user.photo.data
+                      )}`}
+                      alt="User's profile shot"
+                    />
+                  )}
                 </div>
                 {/* {user.photo && user.photo.type === 'Buffer' && (
                   <img src={`{data:image/jpeg;base64,${user.photo.data}`} alt="User's Photo" />
@@ -66,15 +73,18 @@ function Results() {
               </div>
               <div className='user-profile-info'>
                 <h3 className='user-profile-title'>
-                  <span className='user-profile-name'>{user.firstName} {user.lastName} </span>
-                  <span className='user-profile-age-gender'>{user.age} {user.gender}</span>
+                  <span className='user-profile-name'>
+                    {user.firstName} {user.lastName}{' '}
+                  </span>
+                  <span className='user-profile-age-gender'>
+                    {user.age} {user.gender}
+                  </span>
                 </h3>
                 <p className='user-profile-about'>{user.about}</p>
-              </div>              
+              </div>
             </div>
           ))}
         </div>
-        
       </div>
     </div>
   );

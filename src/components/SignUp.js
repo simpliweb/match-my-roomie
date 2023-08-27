@@ -31,11 +31,11 @@ function SignUp() {
   const handleFormValidation = async () => {
     const isValidForm  = await trigger(); // Manually trigger form validation
     setIsFormValid(isValidForm);
-    setIsFormSubmitted(true);;
+    //setIsFormSubmitted(true);;
   };
 
   const onSubmit = async (formData) => {
-    setIsSubmitting(true); // Start loading state
+    //setIsSubmitting(true); // Start loading state
     setIsNavigating(true); // Start navigation state
     console.log(formData)
     try {
@@ -65,7 +65,7 @@ function SignUp() {
       }
     }
     setIsFormValid(true);
-    setIsSubmitting(false); // End loading state
+    //setIsSubmitting(false); // End loading state
     setIsNavigating(false); // End navigation state
   };
 
@@ -191,8 +191,9 @@ function SignUp() {
           <div
             className={`signup-button ${isValid ? 'valid' : 'invalid'}`}
           >
-            <button type='submit' onClick={handleFormValidation} disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Sign Up'}
+            {/* <button type='submit' onClick={handleFormValidation} disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Sign Up'} */}
+            <button type='submit' onClick={handleFormValidation}>
             </button>
           </div>
         </form>

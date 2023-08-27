@@ -14,6 +14,8 @@ function CreateProfile() {
   const isLastPage = page === 3;
   const { userId } = useParams();
   const [formData, setFormData] = useState({})
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const {
     control,
@@ -24,7 +26,9 @@ function CreateProfile() {
   } = useForm();
 
 
-  const handleGoBack = () => {
+  const handleGoBack = (e) => {
+    e.preventDefault();
+    console.log('Current page:', page);
     if (page > 0) {
       setPage(page - 1);
     } 
@@ -116,70 +120,88 @@ function CreateProfile() {
   }; 
 
   const handleFormSubmit= async (form) => {
+    //setIsSubmitting(true); // Start loading state
+    setIsNavigating(true); // Start navigation state
+
     // Add userID to the form object
     form.userId = userId;
 
-   // Attach image buffer to form
-   if (imageBuffer) {
-    form.photo = {
-       type: 'Buffer', // Indicate that the data is a buffer
-       data: Array.from(new Uint8Array(imageBuffer)), // Convert buffer to an array of integers
-       contentType: 'image/jpeg', // Replace with the appropriate content type
-     };
-   }
+    // Attach image buffer to form
+    if (imageBuffer) {
+      form.photo = {
+        type: 'Buffer', // Indicate that the data is a buffer
+        data: Array.from(new Uint8Array(imageBuffer)), // Convert buffer to an array of integers
+        contentType: 'image/jpeg', // Replace with the appropriate content type
+      };
+    }
 
-   if (page === 3){
-    try {
+    if (page === 3) {
+      try {
         let token = localStorage.getItem('token');
         token = JSON.parse(token)?.authToken;
 
-        const response = await fetch('https://mmr2.onrender.com/createprofile', {
-        method: 'POST',   
-        body: JSON.stringify(form),
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-        });
+        const response = await fetch(
+          'https://mmr2.onrender.com/createprofile',
+          {
+            method: 'POST',
+            body: JSON.stringify(form),
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (response.ok) {
-        const result = await response.json();
-        navigate(`/success/${result.newProfile.user}`); // Navigate on success
+          const result = await response.json();
+          navigate(`/success/${result.newProfile.user}`); // Navigate on success
         } else {
-            console.error('Server error:', response.status, response.statusText);
+          console.error('Server error:', response.status, response.statusText);
         }
-        } catch (error) {
+      } catch (error) {
         console.error('API Error:', error);
-        }
+      }
     }
-}
+    //setIsSubmitting(false); // End loading state
+    setIsNavigating(true); // End navigation state
+  }
 
 
   return (
-    <form className='create-profile-forms-container'>
+    <div className='all-forms-container'>
+      <form
+        className={`create-profile-forms-container ${
+          isNavigating ? 'blur-overlay' : ''
+        }`}
+      >
         {page !== 0 && (
-        <button className='back-button' onClick={handleGoBack}>
+          <button className='back-button' onClick={handleGoBack}>
             <i className='fas fa-arrow-left'></i>
             Back
-        </button>
+          </button>
         )}
+        {/* <div className={`all-forms ${isNavigating ? 'blur-overlay' : ''}`}> */}
         <div className='all-forms'>{PageDisplay()}</div>
-    
+
         <div className='button-group'>
-            <button
+          <button
             type='button'
-            className={`continue-button ${isLastPage ? 'submit-button' : ''} ${isValid ? 'valid' : 'invalid'}`}
+            className={`continue-button ${isLastPage ? 'submit-button' : ''} ${
+              isValid ? 'valid' : 'invalid'
+            }`}
             onClick={handleSubmit(handleContinue)}
-            >
+          >
             {isLastPage ? 'Submit' : 'Continue'}
-            </button>
-            {page === 2 || page === 3 ? (
+          </button>
+          {page === 2 || page === 3 ? (
             <button type='button' className='skip-button' onClick={handleSkip}>
-                Not Now
+              Not Now
             </button>
-            ) : null}
+          ) : null}
         </div>
-    </form>
+      </form>
+      <div id='loader' className={isNavigating ? 'show-load' : ''}></div>
+    </div>
   );
 }
 export default CreateProfile;
