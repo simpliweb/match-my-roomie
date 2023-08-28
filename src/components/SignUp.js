@@ -194,6 +194,7 @@ function SignUp() {
             {/* <button type='submit' onClick={handleFormValidation} disabled={isSubmitting}>
             {isSubmitting ? 'Submitting...' : 'Sign Up'} */}
             <button type='submit' onClick={handleFormValidation}>
+              Sign up
             </button>
           </div>
         </form>
